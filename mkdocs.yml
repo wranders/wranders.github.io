@@ -1,8 +1,0 @@
-site_name: DoubleU Codes
-theme:
-  favicon: 'images/favicon.ico'
-  logo: 'images/logo.png'
-  name: 'material'
-  palette:
-    primary: 'blue grey'
-    accent: 'red'

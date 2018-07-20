@@ -1,3 +1,1 @@
-This is the source for my User page.
-
-Built with MkDocs.
+Home page and web development practice.
