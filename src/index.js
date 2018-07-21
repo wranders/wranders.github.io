@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import './index.css';
-import Header from 'com/Header';
+import Landing from 'com/Landing';
 
 let components = (
-    <Header />
+    <Landing />
 );
 
 ReactDOM.render(components, document.getElementById('root'));
