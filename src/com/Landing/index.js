@@ -1,7 +1,6 @@
 import React from 'react';
 import Particles  from 'react-particles-js';
 import Logo from 'com/Landing/Logo'
-
 import LandingLogo from './Logo/landing_logo.png';
 
 class Landing extends React.Component {
@@ -20,6 +19,7 @@ class Landing extends React.Component {
                     border: '0.1em solid #ddd',
                     borderRadius: '25%'
                 }}
+                alt="DoUbleU Logo"
             />
             <Particles 
                 params={{
