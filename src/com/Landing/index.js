@@ -1,5 +1,4 @@
 import React from 'react';
-import Particles  from 'react-particles-js';
 import Logo from 'com/Landing/Logo'
 import LandingLogo from './Logo/landing_logo.png';
 
@@ -20,33 +19,6 @@ class Landing extends React.Component {
                     borderRadius: '25%'
                 }}
                 alt="DoUbleU Logo"
-            />
-            <Particles 
-                params={{
-                    particles: {
-                        number: {
-                            value: 80
-                        },
-        			    line_linked: {
-                            enable: true,
-                            distance: '150',
-                            color: '#ffffff',
-                            opacity: '0.1',
-                            width: '1'
-                        },
-                        move: {
-                            enable: true,
-                            speed: 1
-                        }
-                    }
-                }}
-                style={{
-                    position: "fixed",
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%'
-                }}
             />
             </div>
         );
