@@ -1,13 +1,5 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8a4efc3cc458fd5ee1a810fd4c8ecd02",
-    "url": "static/..\\LICENSE.md"
-  },
-  {
-    "revision": "7d02242478d287a161a9fd0f95022492",
-    "url": "static/..\\README.md"
-  },
-  {
     "revision": "51e16929100699211f0163ed9f9de690",
     "url": "static/..\\browserconfig.xml"
   },
