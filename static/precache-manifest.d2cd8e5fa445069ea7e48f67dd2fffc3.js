@@ -1,14 +1,14 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "51e16929100699211f0163ed9f9de690",
+    "revision": "7223995bc6056db594a9ba29bdc6ace6",
     "url": "static/..\\browserconfig.xml"
   },
   {
-    "revision": "d13f6e8bbb390d9ee653dcde3d7f4a4b",
+    "revision": "b682022cad130df55b7fbfd5e4ff38eb",
     "url": "static/..\\index.html"
   },
   {
-    "revision": "e39599aabc194cb4fb5cbd407b82e627",
+    "revision": "79e56e0f8034317ad685af6eebb5a982",
     "url": "static/..\\manifest.json"
   },
   {
@@ -29,6 +29,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "f727157dc062547f13540b00a0f356a1",
     "url": "static/icons\\android-icon-48x48.png"
+  },
+  {
+    "revision": "9d34a15cbf08e11eed0325d964548a89",
+    "url": "static/icons\\android-icon-512x512.png"
   },
   {
     "revision": "34161f91c49af448782fd1874c8b78da",
@@ -107,8 +111,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "static/icons\\ms-icon-70x70.png"
   },
   {
-    "revision": "797e0b1c5aca14fa9ab0",
-    "url": "static/main.1a0c7b89ee6c23f5841d.js"
+    "revision": "f79b1a5698c1b867a96b",
+    "url": "static/main.200a7b6b40c2444ee28c.js"
   },
   {
     "url": "static/nebula.a18b81fad43df8c59fe034d6cac5d50b.jpg"
