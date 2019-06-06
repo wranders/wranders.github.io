@@ -1,6 +1,7 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = [
     {
@@ -48,7 +49,7 @@ module.exports = [
         output: {
             filename: '[name].[contenthash].js',
             path: path.resolve(__dirname, 'build/static'),
-            publicPath: 'static'
+            publicPath: 'static/'
         },
         performance: {
             hints: process.env.NODE_ENV === 'production' ? 'warning' : false
@@ -72,12 +73,16 @@ module.exports = [
                 template: path.resolve(__dirname, 'src/index.html'),
                 meta: {
                     'viewport': 'width=device-width, initial-scale=1, shrink-to-fit=no',
-                    'theme-color': '#000000',
-                    'msapplication-TileColor': '#000000'
                 },
                 templateParameters: {
                     publicUrl: 'https://www.doubleu.codes'
                 }
+            }),
+            new WorkboxPlugin.GenerateSW({
+                swDest: '../service-worker.js',
+                clientsClaim: true,
+                skipWaiting: true,
+                exclude: [ /CNAME$/, /\.md$/]
             })
         ]
     }
