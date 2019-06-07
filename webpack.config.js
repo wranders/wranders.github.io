@@ -7,7 +7,7 @@ module.exports = [
     {
         name: 'wranders.github.io',
         entry: {
-            main: path.resolve(__dirname, 'src/index.jsx')
+            'static/js/main': './src/index.jsx'
         },
         module: {
             rules: [
@@ -21,6 +21,8 @@ module.exports = [
                 },
                 {
                     test: /\.css$/,
+                    exclude: /node_modules/,
+                    include: path.resolve(__dirname, 'src'),
                     use: [
                         { loader: 'style-loader' },
                         { loader: 'css-loader' }
@@ -28,11 +30,14 @@ module.exports = [
                 },
                 {
                     test: /\.(png|jpg)$/,
+                    exclude: /node_modules/,
+                    include: path.resolve(__dirname, 'src/img'),
                     use: {
                         loader: 'file-loader',
                         options: {
-                            name: '[name].[hash].[ext]',
-                            publicPath: 'static'
+                            name: '[name].[contenthash].[ext]',
+                            outputPath: 'static/img',
+                            publicPath: 'static/img'
                         }
                     }
                 }
@@ -48,38 +53,41 @@ module.exports = [
         },
         output: {
             filename: '[name].[contenthash].js',
-            path: path.resolve(__dirname, 'build/static'),
-            publicPath: 'static/'
+            chunkFilename: 'static/js/[name].[contenthash].js',
+            path: path.resolve(__dirname, 'build'),
+            publicPath: './'
         },
         performance: {
             hints: process.env.NODE_ENV === 'production' ? 'warning' : false
         },
         optimization: {
             splitChunks: {
-                chunks: 'all'
+                chunks: 'all',
+                cacheGroups: {
+                    vendor: {
+                        test: /[\\/]node_modules[\\/].*\.js$/,
+                        name: 'vendors',
+                        chunks: 'all',
+                    },
+                },
             }
         },
         plugins: [
             new CopyWebpackPlugin([
-                { from: 'public/icons', to: 'icons' },
-                { from: 'public/CNAME', to: '../CNAME', toType: 'file'},
-                { from: 'public/browserconfig.xml', to: '../browserconfig.xml', toType: 'file'},
-                { from: 'public/manifest.json', to: '../manifest.json', toType: 'file'},
-                { from: 'README.md', to: '../README.md', toType: 'file'},
-                { from: 'LICENSE.md', to: '../LICENSE.md', toType: 'file'}
+                { from: 'public/icons', to: 'static/icons' },
+                { from: 'public/CNAME', to: 'CNAME', toType: 'file'},
+                { from: 'public/browserconfig.xml', to: 'browserconfig.xml', toType: 'file'},
+                { from: 'public/manifest.json', to: 'manifest.json', toType: 'file'},
+                { from: 'README.md', to: 'README.md', toType: 'file'},
+                { from: 'LICENSE.md', to: 'LICENSE.md', toType: 'file'}
             ]),
             new HtmlWebpackPlugin({
-                filename: path.resolve(__dirname, 'build/index.html'),
-                template: path.resolve(__dirname, 'src/index.html'),
-                meta: {
-                    'viewport': 'width=device-width, initial-scale=1, shrink-to-fit=no',
-                },
-                templateParameters: {
-                    publicUrl: 'https://www.doubleu.codes'
-                }
+                filename: 'index.html',
+                template: 'src/index.html'
             }),
             new WorkboxPlugin.GenerateSW({
-                swDest: '../service-worker.js',
+                swDest: 'service-worker.js',
+                importsDirectory: 'static/js',
                 clientsClaim: true,
                 skipWaiting: true,
                 exclude: [ /CNAME$/, /\.md$/]

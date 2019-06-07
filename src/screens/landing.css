@@ -1,0 +1,10 @@
+.logo {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    width: 20vh;
+    border: 0.1em solid #dddddd;
+    border-radius: 25%;
+}
