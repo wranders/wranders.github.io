@@ -2,7 +2,7 @@ import React from 'react';
 
 const Image = (props) => {
     return(
-        <img src={props.img} class={props.class} alt={props.alt}/>
+        <img src={props.img} className={props.class} alt={props.alt}/>
     )
 }
 
