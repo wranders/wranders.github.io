@@ -6,8 +6,10 @@ export default function() {
     return (
         <Switch>
             <Route path="/" exact component={defaultTitle}/>
+            {/*<Route path="/about" exact component={aboutTitle}/>*/}
         </Switch>
     )
 }
 
 const defaultTitle = () => <Title render="Welcome | DoUbleU"/>;
+/*const aboutTitle = () => <Title render="About | DoUbleU"/>;*/
