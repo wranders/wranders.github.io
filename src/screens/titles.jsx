@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Title from 'com/title';
 
-export default function() {
+const Titles = () => {
     return (
         <Switch>
             <Route path="/" exact component={defaultTitle}/>
@@ -13,3 +13,5 @@ export default function() {
 
 const defaultTitle = () => <Title render="Welcome | DoUbleU"/>;
 /*const aboutTitle = () => <Title render="About | DoUbleU"/>;*/
+
+export default Titles;

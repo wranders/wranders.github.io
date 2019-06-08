@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-export default class LinkBox extends Component {
-    render() {
-        return (
-            <div className={this.props.className}>
-                {this.props.children}
-            </div>
-        )
-    }
+const LinkBox = (props) => {
+    return (
+        <div className={props.className}>
+            {props.children}
+        </div>
+    )
 }
 
+
 LinkBox.propTypes = {
+    className: PropTypes.string,
     children: function(props, propName, componentName) {
         const prop = props[propName];
         let error = null;
@@ -26,3 +27,5 @@ LinkBox.propTypes = {
         return error;
     }
 }
+
+export default LinkBox;

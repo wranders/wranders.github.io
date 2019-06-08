@@ -1,22 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-export default class NavBar extends Component {
-    render() {
-        return (
-            <nav className={this.props.className}>
-                {React.Children.map(this.props.children, child => {
-                    return React.cloneElement(child, {
-                        className: this.props.childClass,
-                        activeClassName: this.props.activeClassName
-                    })
-                })}
-            </nav>
-        )
-    }
+const NavBar = (props) => {
+    return (
+        <nav className={props.className}>
+            {React.Children.map(props.children, child => {
+                return React.cloneElement(child, {
+                    className: props.childClass,
+                    activeClassName: props.activeClassName
+                })
+            })}
+        </nav>
+    )
 }
 
 NavBar.propTypes = {
+    className: PropTypes.string,
+    childClass: PropTypes.string,
+    activeClassName: PropTypes.string.isRequired,
     children: function(props, propName, componentName) {
         const prop = props[propName]
         let error = null
@@ -31,3 +33,5 @@ NavBar.propTypes = {
         return error
     }
 }
+
+export default NavBar;
