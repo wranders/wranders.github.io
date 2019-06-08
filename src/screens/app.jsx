@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, NavLink, Route, Switch } from 'react-router-dom';
 
-import NavBar from 'com/nav';
+import NavBar from 'com/navbar';
 import Landing from 'screens/landing/landing';
 
 import Title from './titles';

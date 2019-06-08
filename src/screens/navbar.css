@@ -4,21 +4,22 @@
     width: 100vw;
 }
 
-.topnav>.navitem {
+.topnav > .navitem {
     float: left;
     color: #f2f2f2;
     text-align: center;
     padding: 0.8em 0.8em;
     text-decoration: none;
-    font-size: 1em;
+    font-size: 1.2em;
+    letter-spacing: 0.1em;
 }
 
-.topnav>.navitem:hover {
+.topnav > .navitem:hover {
     background-color: #ddd;
     color: black;
 }
 
-.topnav>.navitem.active {
+.topnav > .navitem.active {
     background-color: #619857;
     color: #fff;
 }

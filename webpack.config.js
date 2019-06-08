@@ -29,7 +29,7 @@ module.exports = [
                     ]
                 },
                 {
-                    test: /\.(png|jpg)$/,
+                    test: /\.(png|jpg|svg)$/,
                     exclude: /node_modules/,
                     include: path.resolve(__dirname, 'src/img'),
                     use: {
