@@ -1,5 +1,6 @@
 body {
     font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
     background: url("img/nebula.jpg") no-repeat fixed center/cover;
     position: absolute;
     left: 0;

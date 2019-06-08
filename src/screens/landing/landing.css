@@ -1,10 +1,72 @@
-.logo {
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-    width: 20vh;
-    border: 0.1em solid #dddddd;
+.landingGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 20vh 1fr 1fr 1fr;
+    grid-template-rows: 20vh 10vh 1fr;
+    grid-template-areas: 
+        ". . . Logo . . ."
+        ". . . . . . . "
+        ". . Linkbox Linkbox Linkbox . .";
+    grid-gap: 0.5em;
+    margin-top: 2em;
+    width: 100%;
+    overflow: hidden;
+}
+
+.landingGrid > .logo {
+    grid-area: Logo;
+    /*object-fit: contain;*/
+    border: 0.2em solid #dddddd;
     border-radius: 25%;
+    width: calc(20vh - 0.2em);
+    height: calc(20vh - 0.2em);
+}
+
+.landingGrid > .linkbox {
+    grid-area: Linkbox;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-evenly;
+    color: white;
+}
+
+.landingGrid > .linkbox > a {
+    display: inline-block;
+    margin: 2em;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.landingGrid > .linkbox > a > svg {
+    margin: 0 auto;
+}
+
+.linkicon {
+    width: 10vh;
+}
+
+path, polygon {
+    transition: fill .3s;
+}
+
+a {
+    transition: color .3s;
+}
+
+.linkicon path, .linkicon polygon {
+    fill: white;
+}
+
+.linkicon:hover path, .linkicon:hover polygon {
+    /*fill: rgb(79, 140, 201);*/
+    fill: #619857;
+}
+
+.landingGrid > .linkbox > a {
+    color: white;
+}
+
+.landingGrid > .linkbox > a:hover {
+    /*color: rgb(79, 140, 201);*/
+    color: #619857;
 }
