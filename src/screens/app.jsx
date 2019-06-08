@@ -1,19 +1,27 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, NavLink, Route, Switch } from 'react-router-dom';
+
+import NavBar from 'com/nav';
+import Landing from 'screens/landing/landing';
+
 import Title from './titles';
 
-import Landing from './landing';
+
+import './navbar.css';
 
 export default class App extends Component {
     render() {
         return (
             <Router>
-                <div>
-                    <Title />
-                    <Switch>
-                        <Route path="/" exact={true} component={Landing}/>
-                    </Switch>
-                </div>
+                <Title />
+                <NavBar className="topnav"
+                        childClass="navitem" 
+                        activeClassName="active">
+                    <NavLink to="/" exact>Home</NavLink>
+                </NavBar>
+                <Switch>
+                    <Route path="/" exact component={Landing}/>
+                </Switch>
             </Router>
         )
     }
