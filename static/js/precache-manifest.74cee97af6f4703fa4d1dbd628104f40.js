@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./browserconfig.xml"
   },
   {
-    "revision": "57332f6fd80072fb3cf4b624b195d1f8",
+    "revision": "5bee4a235601099c95fd38c98a558181",
     "url": "./index.html"
   },
   {
@@ -18,12 +18,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/img/nebula.a18b81fad43df8c59fe034d6cac5d50b.jpg"
   },
   {
-    "revision": "b73a5c658386e4fb54ba",
-    "url": "./static/js/main.de2035285b33732e430e.js"
+    "revision": "2c936cf8ca0fe3eddf7c",
+    "url": "./static/js/main.55f8c09a4835516ab90e.js"
   },
   {
-    "revision": "413d142ee1fc6b3b26a1",
-    "url": "./static/js/vendors.e3a27ff6c389f2b3d729.js"
+    "revision": "5198b8f14b8ce183299d",
+    "url": "./static/js/vendors.ee35e314123a71e98ba7.js"
   },
   {
     "revision": "69cb89f7547a4dfc2253ecbdebd36216",
