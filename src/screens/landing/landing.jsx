@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Image from 'com/Image';
 import Logo from 'img/doubleu_logo.png';
 
