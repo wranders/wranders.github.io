@@ -4,13 +4,13 @@ import './about.css';
 
 const About = () => {
     return (
-        <div className="about">
+        <main className="about">
             <div className="content">
                 {/* 
                     Placeholder
                 */}
             </div>
-        </div>
+        </main>
     )
 }
 
