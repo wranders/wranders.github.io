@@ -1,7 +1,7 @@
 .landingGrid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 20vh 1fr 1fr 1fr;
-    grid-template-rows: 20vh 10vh 1fr;
+    grid-template-columns: 1fr 1fr 1fr 20.5vh 1fr 1fr 1fr;
+    grid-template-rows: 20.5vh 10vh 1fr;
     grid-template-areas: 
         ". . . Logo . . ."
         ". . . . . . . "
@@ -59,7 +59,7 @@ a {
 
 .linkicon:hover path, .linkicon:hover polygon {
     /*fill: rgb(79, 140, 201);*/
-    fill: #619857;
+    fill: #6AA460;
 }
 
 .landingGrid > .linkbox > a {
@@ -68,5 +68,5 @@ a {
 
 .landingGrid > .linkbox > a:hover {
     /*color: rgb(79, 140, 201);*/
-    color: #619857;
+    color: #6AA460;
 }
