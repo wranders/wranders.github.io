@@ -1,0 +1,24 @@
+{
+    "parser": "babel-eslint",
+    "plugins": [
+        "react"
+    ],
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "rules": {
+        "max-len": [1, 120, 2, { "ignoreComments": true}]
+    },
+    "globals": {
+        "navigator": true,
+        "window": true,
+        "document": true,
+        "console": true
+    }
+}
