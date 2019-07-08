@@ -1,5 +1,12 @@
 {
     "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
     "plugins": [
         "react"
     ],
@@ -8,17 +15,16 @@
             "version": "detect"
         }
     },
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": true
+    },
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended"
     ],
     "rules": {
         "max-len": [1, 120, 2, { "ignoreComments": true}]
-    },
-    "globals": {
-        "navigator": true,
-        "window": true,
-        "document": true,
-        "console": true
     }
 }
