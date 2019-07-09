@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "eslint src/**/*.jsx",
     "start": "webpack --mode=development --progress --watch",
-    "build": "rimraf build/* && webpack --mode=production",
+    "prebuild": "rimraf build/*",
+    "build": "webpack --mode=production",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build -b master"
   },
