@@ -78,6 +78,7 @@ module.exports = [
                 { from: 'public/CNAME', to: 'CNAME', toType: 'file'},
                 { from: 'public/browserconfig.xml', to: 'browserconfig.xml', toType: 'file'},
                 { from: 'public/manifest.json', to: 'manifest.json', toType: 'file'},
+                { from: 'public/keybase.txt', to: 'keybase.txt', toType: 'file'},
                 { from: 'README.md', to: 'README.md', toType: 'file'},
                 { from: 'LICENSE.md', to: 'LICENSE.md', toType: 'file'}
             ]),
