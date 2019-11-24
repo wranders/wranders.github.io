@@ -4,8 +4,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./browserconfig.xml"
   },
   {
-    "revision": "79a43a8857fbfb87ff06f0b3cc7322d3",
+    "revision": "36c140456f7b19f93832d7ca6c1674d1",
     "url": "./index.html"
+  },
+  {
+    "revision": "1aa985f744832f7a09585b1e176176a4",
+    "url": "./keybase.txt"
   },
   {
     "revision": "2d3a34ecc9f95344415904b798755d7a",
@@ -118,7 +122,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/js/main.6c92fce61fcf66126787.js"
   },
   {
-    "revision": "27457d3240dc881b6264",
-    "url": "./static/js/vendors.bde6c167d747ebf22744.js"
+    "revision": "4c674b517730add4f185",
+    "url": "./static/js/vendors.e1b260918e352e4580c0.js"
   }
 ]);
