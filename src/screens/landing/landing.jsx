@@ -27,7 +27,7 @@ const Landing = () => {
                     </svg><br/>
                     Github
                 </a>
-                <a href="https://www.doubleu.codes/pubdocs/" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.doubleu.codes/docs/" target="_blank" rel="noopener noreferrer">
                     {/* Book SVG Logo */}
                     <svg className="linkicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 257 257">
                         <path d="M60.859 112.533c-6.853 0-6.853 10.646 0 10.646c27.294 0 54.583 0 81.875 0c6.865 0
