@@ -13,7 +13,7 @@ const App = () => {
     return (
         <HashRouter>
             <Title />
-            <Navbar fixed="top" collapseOnSelect expand="sm">
+            <Navbar fixed="top" collapseOnSelect expand="sm" variant="dark">
                 <Navbar.Brand>DoUbleU</Navbar.Brand>
                 <Navbar.Toggle/>
                 <Navbar.Collapse>
