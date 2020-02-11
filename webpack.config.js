@@ -88,7 +88,6 @@ module.exports = [
             }),
             new WorkboxPlugin.GenerateSW({
                 swDest: 'service-worker.js',
-                importsDirectory: 'static/js',
                 clientsClaim: true,
                 skipWaiting: true,
                 exclude: [ /CNAME$/, /\.md$/]
