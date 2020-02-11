@@ -35,7 +35,7 @@ module.exports = [
                     use: {
                         loader: 'file-loader',
                         options: {
-                            name: '[name].[contenthash].[ext]',
+                            name: '[name].[ext]',
                             outputPath: 'static/img',
                             publicPath: 'static/img'
                         }

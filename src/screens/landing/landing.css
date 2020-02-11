@@ -1,72 +1,40 @@
-.landingGrid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 20.5vh 1fr 1fr 1fr;
-    grid-template-rows: 20.5vh 10vh 1fr;
-    grid-template-areas: 
-        ". . . Logo . . ."
-        ". . . . . . . "
-        ". . Linkbox Linkbox Linkbox . .";
-    grid-gap: 0.5em;
-    margin-top: 2em;
-    width: 100%;
-    overflow: hidden;
+main {
+    width: 100vw;
 }
 
-.landingGrid > .logo {
-    grid-area: Logo;
-    /*object-fit: contain;*/
-    border: 0.2em solid #dddddd;
+.logo-row {
+    padding: 1em 0 1em 0;
+}
+
+.logo {
+    border: 0.2em solid white;
     border-radius: 25%;
-    width: calc(20vh - 0.2em);
-    height: calc(20vh - 0.2em);
+    max-height: 128px;
 }
 
-.landingGrid > .linkbox {
-    grid-area: Linkbox;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-content: space-evenly;
+.link-row {
+    max-height: 128px;
+}
+
+.link-row a {
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.5em;
+    transition: color .3s;
     color: white;
 }
 
-.landingGrid > .linkbox > a {
-    display: inline-block;
-    margin: 2em;
-    text-align: center;
-    text-decoration: none;
-    font-size: 1.2em;
+.link-row a:hover {
+    color: black;
 }
 
-.landingGrid > .linkbox > a > svg {
-    margin: 0 auto;
-}
-
-.linkicon {
-    width: 10vh;
-}
-
-path, polygon {
+.link-row a path, .link-row a polygon {
+    fill: white;
     transition: fill .3s;
 }
 
-a {
-    transition: color .3s;
-}
-
-.linkicon path, .linkicon polygon {
-    fill: white;
-}
-
-.linkicon:hover path, .linkicon:hover polygon {
-    /*fill: rgb(79, 140, 201);*/
-    fill: #6AA460;
-}
-
-.landingGrid > .linkbox > a {
-    color: white;
-}
-
-.landingGrid > .linkbox > a:hover {
-    /*color: rgb(79, 140, 201);*/
-    color: #6AA460;
+.link-row a:hover path, .link-row a:hover polygon {
+    fill: #6aa460;
+    stroke: black;
+    stroke-width: 2px;
 }

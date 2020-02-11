@@ -1,8 +1,8 @@
 import React from 'react';
-import { HashRouter as Router, NavLink, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
+import { Navbar, Nav } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
-import NavBar from 'com/navbar';
-{/*import About from 'screens/about/about';*/}
 import Landing from 'screens/landing/landing';
 
 import Title from './titles';
@@ -11,19 +11,26 @@ import './navbar.css';
 
 const App = () => {
     return (
-        <Router>
+        <HashRouter>
             <Title />
-            <NavBar className="topnav"
-                    childClass="navitem" 
-                    activeClassName="active">
-                <NavLink to="/" exact>Home</NavLink>
-                {/*<NavLink to="/about" exact>About</NavLink>*/}
-            </NavBar>
+            <Navbar fixed="top" collapseOnSelect expand="sm">
+                <Navbar.Brand>DoUbleU</Navbar.Brand>
+                <Navbar.Toggle/>
+                <Navbar.Collapse>
+                    <LinkContainer to="/" exact>
+                        <Nav.Link>Home</Nav.Link>
+                    </LinkContainer>
+                </Navbar.Collapse>
+            </Navbar>
             <Switch>
                 <Route path="/" exact component={Landing}/>
-                {/*<Route path="/about" exact component={About}/>*/}
             </Switch>
-        </Router>
+            <Navbar fixed="bottom">
+                <Navbar.Text>
+                    &copy; <b>2018-2020</b> doubleu.codes All Rights Reserved
+                </Navbar.Text>
+            </Navbar>
+        </HashRouter>
     )
 }
 
