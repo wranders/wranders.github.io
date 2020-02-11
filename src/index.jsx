@@ -17,4 +17,4 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-render(<App />, document.getElementById('root'))
+render(<App />, document.getElementById('app-root'))

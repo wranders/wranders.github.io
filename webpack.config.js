@@ -40,6 +40,12 @@ module.exports = [
                             publicPath: 'static/img'
                         }
                     }
+                },
+                {
+                    test: /\.pug$/,
+                    use: {
+                        loader: 'pug-loader'
+                    }
                 }
             ]
         },
@@ -84,7 +90,7 @@ module.exports = [
             ]),
             new HtmlWebpackPlugin({
                 filename: 'index.html',
-                template: 'src/index.html'
+                template: 'src/index.pug'
             }),
             new WorkboxPlugin.GenerateSW({
                 swDest: 'service-worker.js',
