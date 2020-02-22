@@ -9,15 +9,15 @@ const GithubLogo = ({
     viewBox = "0 0 257 257"
 }) => (
 <svg
-    width={width}
-    height={width}
-    style={style}
-    viewBox={viewBox}
-    className={`${className || ""}`}
+    width = { width }
+    height = { width }
+    style = { style }
+    viewBox = { viewBox }
+    className = { `${className || ""}` }
     xmlns="http://www.w3.org/2000/svg" 
 >
 <path
-    fill={fill}
+    fill = { fill }
     d="
     M 128 0
     C 57.28125 0 0 57.28125 0 128
