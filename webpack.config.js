@@ -86,7 +86,7 @@ module.exports = [
                 { from: 'public/manifest.json', to: 'manifest.json', toType: 'file'},
                 { from: 'public/keybase.txt', to: 'keybase.txt', toType: 'file'},
                 { from: 'README.md', to: 'README.md', toType: 'file'},
-                { from: 'LICENSE.md', to: 'LICENSE.md', toType: 'file'}
+                { from: 'LICENSE', to: 'LICENSE', toType: 'file'}
             ]),
             new HtmlWebpackPlugin({
                 filename: 'index.html',
