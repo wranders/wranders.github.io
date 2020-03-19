@@ -23,15 +23,14 @@ function copyRootfiles() {
         'public/browserconfig.xml',
         'public/CNAME',
         'public/keybase.txt',
-        'public/manifest.json',
-        'public/favicon.ico'
+        'public/site.webmanifest',
     ], {base: './public'})
     .pipe(dest(outdir));
 }
 
 function copyIcons() {
     return src('public/icons/*', {base:'./public'})
-        .pipe(dest(outdir + '/static'))
+        .pipe(dest(outdir + '/static'));
 }
 
 function copyImages() {
