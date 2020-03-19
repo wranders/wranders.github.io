@@ -11,11 +11,18 @@ html(lang='en')
         meta(http-equiv='x-ua-compatible' content='ie=edge,chrome=1')
         meta(name='viewport' content='width=device-width,initial-scale=1,shrink-to-fit=no')
         meta(name="msapplication-TileColor" content="#000000")
+        meta(name="theme-color" content="#000000")
         meta(name="msapplication-TileImage" content="/static/icons/mstile-144x144.png")
         meta(name="msapplication-config" content="/browserconfig.xml")
-        meta(name="theme-color" content="#000000")
+
+        link(rel="apple-touch-icon" sizes="180x180" href="/static/icons/apple-touch-icon.png")
         link(rel="manifest" href="/site.webmanifest")
-        include indexIcons.pug
+        link(rel="icon" type="image/png" sizes="16x16" href="/static/icons/favicon-16x16.png")
+        link(rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32x32.png")
+        link(rel="icon" type="image/png" sizes="192x192" href="/static/icons/android-chrome-192x192.png")
+        link(rel="icon" type="image/png" sizes="194x194" href="/static/icons/favicon-194x194.png")
+        link(rel="mask-icon" href="/static/icons/safari-pinned-tab.svg" color="#000000")
+        link(rel="shortcut icon" href="/static/icons/favicon.ico")
 
         //- Bootstrap stylesheet
         link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous')
