@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container, Row, Col, Image } from 'react-bootstrap';
 
-import GithubLogo from 'Image/github_logo.jsx';
-import BookLogo from 'Image/book_logo.jsx';
+import GithubLogo from 'Image/github_logo';
+import BookLogo from 'Image/book_logo';
 
 const Landing = () => {
     return(
