@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Title from 'com/title';
+import Title from 'Components/title';
 
 const Titles = () => {
     return (

@@ -1,11 +1,8 @@
 import React from 'react';
 import { Container, Row, Col, Image } from 'react-bootstrap';
 
-import DoubleULogo from 'img/doubleu_logo.png';
-import GithubLogo from 'img/github_logo.jsx';
-import BookLogo from 'img/book_logo.jsx';
-
-import './landing.css';
+import GithubLogo from 'Image/github_logo.jsx';
+import BookLogo from 'Image/book_logo.jsx';
 
 const Landing = () => {
     return(
@@ -16,7 +13,7 @@ const Landing = () => {
                         className="text-center"
                         xs={{ span: 6, offset: 3 }}
                     >
-                        <Image src={DoubleULogo} className="logo" alt="DoUbleU Logo" fluid />
+                        <Image src='static/img/doubleu_logo.png' className="logo" alt="DoUbleU Logo" fluid />
                     </Col>
                 </Row>
                 <Row className="link-row">

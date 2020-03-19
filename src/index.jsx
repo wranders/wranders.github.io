@@ -1,9 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import App from 'screens/app';
-
-import './index.css';
+import App from 'Screens/app';
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {

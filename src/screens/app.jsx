@@ -3,11 +3,9 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
-import Landing from 'screens/landing/landing';
+import Landing from 'Screens/landing';
 
 import Title from './titles';
-
-import './navbar.css';
 
 const App = () => {
     return (
