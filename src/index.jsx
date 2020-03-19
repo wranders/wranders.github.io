@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 
-import Titles from 'Components/title';
+import Titles from 'Components/titles';
 import Landing from 'Screens/landing';
 import { NavTop, NavBottom } from 'Components/nav';
 
