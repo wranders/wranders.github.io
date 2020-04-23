@@ -1,34 +1,43 @@
 import React from 'react';
-import { render } from 'react-dom';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import ReactRouterDOM from 'react-dom';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 
-import Titles from 'Components/titles';
-import Landing from 'Screens/landing';
-import { NavTop, NavBottom } from 'Components/nav';
+import Navigation from './navigation';
+
+import ThemeWrapper from './components/theme';
+import { TitleProvider } from './components/title';
+
+import ErrNotFound from './screens/errNotFound';
+import Contact from './screens/contact';
+import Home from './screens/home';
 
 if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js').then(() => {
-            // eslint-disable-next-line no-console 
-            console.log('SW registered');
-        }).catch(() => {
-            // eslint-disable-next-line no-console
-            console.log('SW registration failed');
-        });
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').then(() => {
+      console.log('SW registered');
+    }).catch(() => {
+      console.log('SW registration failed');
     });
+  });
 }
 
-const App = () => {
+class App extends React.Component {
+  render() {
     return (
-        <HashRouter>
-            <Titles />
-            <NavTop />
+      <ThemeWrapper>
+        <TitleProvider siteName='DoUbleU'>
+          <HashRouter>
+            <Navigation/>
             <Switch>
-                <Route path="/" exact component={Landing}/>
+              <Route path='/' exact component={Home}/>
+              <Route path='/contact' exact component={Contact}/>
+              <Route component={ErrNotFound}/>
             </Switch>
-            <NavBottom />
-        </HashRouter>
+          </HashRouter>
+        </TitleProvider>
+      </ThemeWrapper>
     )
+  }
 }
 
-render(<App />, document.getElementById('app-root'))
+ReactRouterDOM.render(<App />, document.getElementById('app-root'));

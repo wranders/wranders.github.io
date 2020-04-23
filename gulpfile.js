@@ -1,89 +1,91 @@
-const outdir = './build',
-    del = require('del'),
-    {src, dest, series, parallel} = require('gulp'),
-    cleanCSS = require('gulp-clean-css'),
-    concat = require('gulp-concat'),
-    webpack = require('webpack'),
-    webpackStream = require('webpack-stream'),
-    webpackConfig = require('./webpack.config.js');
+const path = require('path');
+const outdir = path.resolve(__dirname, 'dist');
+const del = require('del');
+const gulp = require('gulp');
+const webpack = require('webpack');
+const webpackStream = require('webpack-stream');
+const webpackConfig = require(path.resolve(__dirname, 'webpack.config.js'));
 
 function clean() {
-    return del(outdir);
+  return del(outdir);
 }
 
 function copyRepoFiles() {
-    return src([
-        'LICENSE',
-        'README.md',
-    ]).pipe(dest(outdir));
+  return gulp.src([
+    path.resolve(__dirname, 'LICENSE'),
+    path.resolve(__dirname, 'README.md')
+  ]).pipe(gulp.dest(outdir));
 }
 
-function copyRootfiles() {
-    return src([
-        'public/browserconfig.xml',
-        'public/CNAME',
-        'public/keybase.txt',
-        'public/site.webmanifest',
-    ], {base: './public'})
-    .pipe(dest(outdir));
+function copyRootFiles() {
+  return gulp.src(
+    [
+      path.resolve(__dirname, 'public', 'browserconfig.xml'),
+      path.resolve(__dirname, 'public', 'CNAME'),
+      path.resolve(__dirname, 'public', 'keybase.txt'),
+      path.resolve(__dirname, 'public', 'pgp_pubkey.asc'),
+      path.resolve(__dirname, 'public', 'site.webmanifest')
+    ],{base: path.resolve(__dirname, 'public')}
+  ).pipe(gulp.dest(outdir));
 }
 
 function copyIcons() {
-    return src('public/icons/*', {base:'./public'})
-        .pipe(dest(outdir + '/static'));
+  return gulp.src(
+    [
+      path.resolve(__dirname, 'public', 'icons', '*'),
+      path.resolve(__dirname, 'public', 'image', '*'),
+    ],{base: path.resolve(__dirname, 'public')}
+  ).pipe(gulp.dest(
+    path.resolve(outdir, 'static')
+  ));
 }
 
-function copyImages() {
-    return src('public/img/*', {base:'./public'})
-        .pipe(dest(outdir + '/static'))
+const copy = (done) => gulp.parallel(
+  copyRepoFiles,
+  copyRootFiles,
+  copyIcons
+)(done);
+
+function webpackDev() {
+  webpackConfig.mode = 'development';
+  webpackConfig.watch = false;
+  return webpackStream(webpackConfig, webpack).pipe(gulp.dest(outdir));
 }
 
-function bundleCSS() {
-    return src('src/styles/*.css')
-        .pipe(cleanCSS())
-        .pipe(concat('style.css'))
-        .pipe(dest(outdir + '/static'))
+function webpackDevWatch() {
+  webpackConfig.mode = 'development';
+  webpackConfig.watch = true;
+  return webpackStream(webpackConfig, webpack).pipe(gulp.dest(outdir));
 }
 
-function buildProd() {
-    webpackConfig.mode = "production";
-    webpackConfig.watch = false;
-    return webpackStream(webpackConfig, webpack)
-        .pipe(dest(outdir));
+function webpackProd() {
+  webpackConfig.mode = 'production';
+  webpackConfig.watch = false;
+  return webpackStream(webpackConfig, webpack).pipe(gulp.dest(outdir));
 }
 
-function buildStart() {
-    webpackConfig.mode = "development";
-    webpackConfig.watch = true;
-    return webpackStream(webpackConfig, webpack)
-        .pipe(dest(outdir));
-}
-
-const copy = parallel(
-    copyRepoFiles,
-    copyRootfiles,
-    copyIcons,
-    copyImages,
-    bundleCSS
+exports.start = gulp.series(
+  clean,
+  gulp.series(
+    copy,
+    webpackDevWatch
+  )
 );
 
-const start = series(
-    clean,
-    parallel(
-        copy,
-        buildStart,
-    )
-)
-
-const build = series(
-    clean,
-    parallel(
-        copy,
-        buildProd,
-    )
+exports.builddev =  gulp.series(
+  clean,
+  gulp.series(
+    copy,
+    webpackDev
+  )
 );
 
-exports.clean = clean
-exports.start = start
-exports.build = build
-exports.default = build
+exports.buildprod = gulp.series(
+  clean,
+  gulp.parallel(
+    copy,
+    webpackProd
+  )
+);
+
+exports.default = this.builddev;
