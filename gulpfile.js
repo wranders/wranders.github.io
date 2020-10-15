@@ -1,91 +1,82 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 const path = require('path');
-const outdir = path.resolve(__dirname, 'dist');
 const del = require('del');
 const gulp = require('gulp');
 const webpack = require('webpack');
 const webpackStream = require('webpack-stream');
 const webpackConfig = require(path.resolve(__dirname, 'webpack.config.js'));
 
+const outDir = path.resolve(__dirname, 'dist');
+
 function clean() {
-  return del(outdir);
+  return del(outDir);
 }
 
 function copyRepoFiles() {
-  return gulp.src([
-    path.resolve(__dirname, 'LICENSE'),
-    path.resolve(__dirname, 'README.md')
-  ]).pipe(gulp.dest(outdir));
+  return gulp
+    .src([
+      path.resolve(__dirname, 'LICENSE'),
+      path.resolve(__dirname, 'README.md'),
+    ])
+    .pipe(gulp.dest(outDir));
 }
 
 function copyRootFiles() {
-  return gulp.src(
-    [
-      path.resolve(__dirname, 'public', 'browserconfig.xml'),
-      path.resolve(__dirname, 'public', 'CNAME'),
-      path.resolve(__dirname, 'public', 'keybase.txt'),
-      path.resolve(__dirname, 'public', 'pgp_pubkey.asc'),
-      path.resolve(__dirname, 'public', 'site.webmanifest')
-    ],{base: path.resolve(__dirname, 'public')}
-  ).pipe(gulp.dest(outdir));
+  return gulp
+    .src(
+      [
+        path.resolve(__dirname, 'public', 'browserconfig.xml'),
+        path.resolve(__dirname, 'public', 'CNAME'),
+        path.resolve(__dirname, 'public', 'keybase.txt'),
+        path.resolve(__dirname, 'public', 'pgp_pubkey.asc'),
+        path.resolve(__dirname, 'public', 'site.webmanifest'),
+      ],
+      { base: path.resolve(__dirname, 'public') },
+    )
+    .pipe(gulp.dest(outDir));
 }
 
 function copyIcons() {
-  return gulp.src(
-    [
-      path.resolve(__dirname, 'public', 'icons', '*'),
-      path.resolve(__dirname, 'public', 'image', '*'),
-    ],{base: path.resolve(__dirname, 'public')}
-  ).pipe(gulp.dest(
-    path.resolve(outdir, 'static')
-  ));
+  return gulp
+    .src(
+      [
+        path.resolve(__dirname, 'public', 'icons', '*'),
+        path.resolve(__dirname, 'public', 'image', '*'),
+      ],
+      { base: path.resolve(__dirname, 'public') },
+    )
+    .pipe(gulp.dest(path.resolve(outDir, 'static')));
 }
 
-const copy = (done) => gulp.parallel(
-  copyRepoFiles,
-  copyRootFiles,
-  copyIcons
-)(done);
+function copy(done) {
+  return gulp.parallel(copyRepoFiles, copyRootFiles, copyIcons)(done);
+}
+
+function runWebpack(isDev, watch) {
+  webpackConfig.mode = isDev ? 'development' : 'production';
+  webpackConfig.watch = watch;
+  return webpackStream(webpackConfig, webpack).pipe(gulp.dest(outDir));
+}
 
 function webpackDev() {
-  webpackConfig.mode = 'development';
-  webpackConfig.watch = false;
-  return webpackStream(webpackConfig, webpack).pipe(gulp.dest(outdir));
+  return runWebpack(true, false);
 }
 
 function webpackDevWatch() {
-  webpackConfig.mode = 'development';
-  webpackConfig.watch = true;
-  return webpackStream(webpackConfig, webpack).pipe(gulp.dest(outdir));
+  return runWebpack(true, true);
 }
 
 function webpackProd() {
-  webpackConfig.mode = 'production';
-  webpackConfig.watch = false;
-  return webpackStream(webpackConfig, webpack).pipe(gulp.dest(outdir));
+  return runWebpack(false, false);
 }
 
-exports.start = gulp.series(
-  clean,
-  gulp.series(
-    copy,
-    webpackDevWatch
-  )
-);
+exports.clean = clean;
 
-exports.builddev =  gulp.series(
-  clean,
-  gulp.series(
-    copy,
-    webpackDev
-  )
-);
+exports.start = gulp.series(clean, copy, webpackDevWatch);
 
-exports.buildprod = gulp.series(
-  clean,
-  gulp.parallel(
-    copy,
-    webpackProd
-  )
-);
+exports.builddev = gulp.series(clean, copy, webpackDev);
+
+exports.buildprod = gulp.series(clean, gulp.parallel(copy, webpackProd));
 
 exports.default = this.builddev;
