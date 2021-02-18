@@ -49,6 +49,7 @@ export default function NavBar({
                   edge="start"
                   color="inherit"
                   onClick={navDrawerContext.toggle}
+                  aria-label="Open Menu"
                 >
                   <MenuIcon />
                 </IconButton>
