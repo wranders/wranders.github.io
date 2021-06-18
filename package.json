@@ -1,17 +1,26 @@
 {
   "name": "wranders.github.io",
-  "version": "1.0.0",
-  "private": true,
+  "author": {
+    "name": "W Anders",
+    "email": "w@doubleu.codes",
+    "url": "https://www.doubleu.codes"
+  },
+  "bugs": "https://github.com/wranders/wranders.github.io/issues",
   "homepage": "https://www.doubleu.codes/",
+  "version": "1.0.0",
+  "license": "MIT",
   "description": "Home page and web development practice",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wranders/wranders.github.io.git"
+  },
+  "private": true,
   "scripts": {
     "lint": "eslint src/**/*.{js,ts,tsx}",
     "build": "gulp",
     "predeploy": "gulp",
     "deploy": "gh-pages -d dist -b master"
   },
-  "author": "W Anders <w@doubleu.codes>",
-  "license": "MIT",
   "devDependencies": {
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
