@@ -63,7 +63,6 @@ export default function TitleCard(): React.ReactElement {
         backgroundColor: theme.palette.common.black,
         backgroundRepeat: 'repeat',
         backgroundAttachment: 'fixed',
-        background: 'center',
         position: 'absolute',
         left: 0,
         right: 0,
