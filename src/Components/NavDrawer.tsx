@@ -75,15 +75,17 @@ export default function NavDrawer({
   )();
   const HeadLink = React.useMemo(
     () =>
-      React.forwardRef((
-        linkProps,
-        ref /* eslint-disable-line @typescript-eslint/no-unused-vars */,
-      ) => (
-        <RouterLink
-          to={(header as NavDrawerHeaderLink).href as string}
-          {...linkProps}
-        />
-      )),
+      React.forwardRef(
+        (
+          linkProps,
+          ref /* eslint-disable-line @typescript-eslint/no-unused-vars */,
+        ) => (
+          <RouterLink
+            to={(header as NavDrawerHeaderLink).href as string}
+            {...linkProps}
+          />
+        ),
+      ),
     [(header as NavDrawerHeaderLink).href],
   );
 
