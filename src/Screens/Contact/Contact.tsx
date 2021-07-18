@@ -66,7 +66,7 @@ export default function Contact(): React.ReactElement {
       },
       keyContent: {
         fontFamily: 'monospace',
-        whiteSpace: 'pre-wrap',
+        whiteSpace: 'pre',
       },
     }),
   )();
@@ -186,7 +186,11 @@ export default function Contact(): React.ReactElement {
           </IconButton>
         }
       />
-      <Dialog onClose={() => setDialogOpen(false)} open={dialogOpen}>
+      <Dialog
+        onClose={() => setDialogOpen(false)}
+        open={dialogOpen}
+        maxWidth={false}
+      >
         <DialogTitle>{dialogTitle}</DialogTitle>
         <DialogContent dividers>
           <DialogContentText className={classes.keyContent}>
