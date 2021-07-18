@@ -109,12 +109,6 @@ export default function Contact(): React.ReactElement {
           Contact
         </Typography>
         <Divider className={classes.spacedDivider} />
-        <Typography>Below are a few ways to get in touch.</Typography>
-        <Typography>
-          I don't use any social media, so profiles on those types of sites
-          claiming to be me are wrong.
-        </Typography>
-        <Divider className={classes.spacedDivider} />
         <List className={classes.contactList}>
           <ContactItem
             avatar={
