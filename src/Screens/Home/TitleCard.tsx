@@ -7,8 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import React from 'react';
 
-const imgBG = '/static/image/circuit-board.svg';
-const imgLogo = '/static/image/logo.webp';
+const imgBG = '/static/images/circuit-board.svg';
+const imgLogo = '/static/images/logo.webp';
 
 export default function TitleCard(): React.ReactElement {
   const classes = makeStyles((theme: Theme) =>
