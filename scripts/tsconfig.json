@@ -14,5 +14,6 @@
       "ESNext",
       "WebWorker",
     ],
+    "skipLibCheck": true
   }
 }
