@@ -3,9 +3,6 @@
     "build.ts",
     "copy.ts",
   ],
-  "include": [
-    "src/*"
-  ],
   "compilerOptions": {
     "target": "ESNext",
     "module": "CommonJS",
@@ -17,8 +14,5 @@
       "ESNext",
       "WebWorker",
     ],
-    "typeRoots": [
-      "../node_modules/@types"
-    ]
   }
 }
