@@ -1,0 +1,24 @@
+{
+  "files": [
+    "build.ts",
+    "copy.ts",
+  ],
+  "include": [
+    "src/*"
+  ],
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "strict": true,
+    "moduleResolution": "node",
+    "rootDir": ".",
+    "outDir": ".",
+    "lib": [
+      "ESNext",
+      "WebWorker",
+    ],
+    "typeRoots": [
+      "../node_modules/@types"
+    ]
+  }
+}
