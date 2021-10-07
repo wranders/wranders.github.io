@@ -15,13 +15,13 @@ type CopyDir = {
 
 type Copy = CopyDir[];
 
-const OutDir = resolve('dist');
+const WebRoot = resolve('dist');
 const CopyFiles: Copy = [
   {
     // Copy repository files
     SrcDir: resolve(__dirname, '..'),
     Files: ['LICENSE', 'README.md'],
-    OutDir: resolve(__dirname, '..', 'dist'),
+    OutDir: WebRoot,
   },
   {
     // Copy web root files
@@ -33,24 +33,24 @@ const CopyFiles: Copy = [
       'pgp_pubkey.asc',
       'site.webmanifest',
     ],
-    OutDir: resolve(__dirname, '..', 'dist'),
+    OutDir: WebRoot,
   },
   {
     // Copy icons
     SrcDir: resolve(__dirname, '..', 'public', 'icons'),
     Files: ['*'],
-    OutDir: resolve(__dirname, '..', 'dist', 'static', 'icons'),
+    OutDir: resolve(WebRoot, 'static', 'icons'),
   },
   {
     // Copy images
     SrcDir: resolve(__dirname, '..', 'public', 'images'),
     Files: ['*'],
-    OutDir: resolve(__dirname, '..', 'dist', 'static', 'images'),
+    OutDir: resolve(WebRoot, 'static', 'images'),
   },
 ];
 
 async function copy(): Promise<void> {
-  if (!existsSync(OutDir)) mkdirSync(OutDir);
+  if (!existsSync(WebRoot)) mkdirSync(WebRoot);
 
   CopyFiles.forEach((fileGroup: CopyDir) => {
     if (!existsSync(fileGroup.OutDir))

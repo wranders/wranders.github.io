@@ -4,12 +4,12 @@ import { build } from 'esbuild';
 import { compileFile } from 'pug';
 import { generateSW } from 'workbox-build';
 
-const OutDir = resolve('dist');
+const WebRoot = resolve('dist');
 const PugEntrypoint = resolve('src/index.pug');
 const AppEntrypoint = resolve('src/index.ts');
 
 async function buildApp(): Promise<void> {
-  if (!existsSync(OutDir)) mkdirSync(OutDir);
+  if (!existsSync(WebRoot)) mkdirSync(WebRoot);
 
   // Build Javascript resources from `src
   await build({
@@ -26,19 +26,19 @@ async function buildApp(): Promise<void> {
     },
     format: 'esm',
     entryPoints: [AppEntrypoint],
-    outdir: OutDir,
+    outdir: WebRoot,
   });
 
   // Build HTML index from Pug.js template
   writeFileSync(
-    join(OutDir, basename(PugEntrypoint, extname(PugEntrypoint)) + '.html'),
+    join(WebRoot, basename(PugEntrypoint, extname(PugEntrypoint)) + '.html'),
     compileFile(PugEntrypoint)(),
   );
 
   // Build Service-Worker
   await generateSW({
-    swDest: resolve(OutDir, 'sw.js'),
-    globDirectory: OutDir,
+    swDest: resolve(WebRoot, 'sw.js'),
+    globDirectory: WebRoot,
   });
 }
 buildApp().catch((msg) => {
