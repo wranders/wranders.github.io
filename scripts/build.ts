@@ -4,9 +4,15 @@ import { build } from 'esbuild';
 import { compileFile } from 'pug';
 import { generateSW } from 'workbox-build';
 
+//==============================================================================
+
 const WebRoot = resolve('dist');
+
 const PugEntrypoint = resolve('src/index.pug');
+
 const AppEntrypoint = resolve('src/index.ts');
+
+//==============================================================================
 
 async function buildApp(): Promise<void> {
   if (!existsSync(WebRoot)) mkdirSync(WebRoot);

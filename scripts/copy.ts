@@ -7,15 +7,10 @@ import {
 } from 'fs';
 import { resolve } from 'path';
 
-type CopyDir = {
-  SrcDir: string;
-  Files: string[];
-  OutDir: string;
-};
-
-type Copy = CopyDir[];
+//==============================================================================
 
 const WebRoot = resolve('dist');
+
 const CopyFiles: Copy = [
   {
     // Copy repository files
@@ -48,6 +43,16 @@ const CopyFiles: Copy = [
     OutDir: resolve(WebRoot, 'static', 'images'),
   },
 ];
+
+//==============================================================================
+
+type CopyDir = {
+  SrcDir: string;
+  Files: string[];
+  OutDir: string;
+};
+
+type Copy = CopyDir[];
 
 async function copy(): Promise<void> {
   if (!existsSync(WebRoot)) mkdirSync(WebRoot);
