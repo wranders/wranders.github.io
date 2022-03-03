@@ -2,6 +2,7 @@
   "files": [
     "build.ts",
     "copy.ts",
+    "publish.ts",
   ],
   "compilerOptions": {
     "target": "ESNext",
