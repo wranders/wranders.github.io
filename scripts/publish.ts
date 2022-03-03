@@ -189,7 +189,7 @@ async function publish(): Promise<void> {
   console.log('Pushing');
   cloneGit.push(options.remote, options.pagesBranch);
 
-  rmSync(clone);
+  rmSync(clone, { force: true, recursive: true });
 }
 publish().catch((msg) => {
   console.error(`\n${msg}\n`);
