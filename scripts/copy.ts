@@ -14,13 +14,13 @@ const WebRoot = resolve('dist');
 const CopyFiles: Copy = [
   {
     // Copy repository files
-    SrcDir: resolve(__dirname, '..'),
+    SrcDir: '.',
     Files: ['LICENSE', 'README.md'],
     OutDir: WebRoot,
   },
   {
     // Copy web root files
-    SrcDir: resolve(__dirname, '..', 'public'),
+    SrcDir: resolve('public'),
     Files: [
       'browserconfig.xml',
       'CNAME',
@@ -32,13 +32,13 @@ const CopyFiles: Copy = [
   },
   {
     // Copy icons
-    SrcDir: resolve(__dirname, '..', 'public', 'icons'),
+    SrcDir: resolve('public', 'icons'),
     Files: ['*'],
     OutDir: resolve(WebRoot, 'static', 'icons'),
   },
   {
     // Copy images
-    SrcDir: resolve(__dirname, '..', 'public', 'images'),
+    SrcDir: resolve('public', 'images'),
     Files: ['*'],
     OutDir: resolve(WebRoot, 'static', 'images'),
   },
