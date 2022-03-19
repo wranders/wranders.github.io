@@ -10,7 +10,7 @@
     "strict": true,
     "moduleResolution": "node",
     "rootDir": ".",
-    "outDir": ".",
+    "outDir": "./bin",
     "lib": [
       "ESNext",
       "WebWorker",

@@ -18,14 +18,14 @@
   "scripts": {
     "lint": "eslint src/**/*.{js,ts,tsx}",
     "clean": "rimraf dist",
-    "precompilescripts": "rimraf scripts/*.js",
-    "compilescripts": "tsc --project scripts/tsconfig.json",
-    "build:copy": "node scripts/copy.js",
-    "build:only": "node scripts/build.js",
+    "precompilescripts": "rimraf scripts/bin",
+    "compilescripts": "tsc --project scripts",
+    "build:copy": "node scripts/bin/copy.js",
+    "build:only": "node scripts/bin/build.js",
     "prebuild": "npm run clean && npm run compilescripts",
     "build": "npm run build:copy && npm run build:only",
     "predeploy": "npm run build",
-    "deploy": "node scripts/publish.js"
+    "deploy": "node scripts/bin/publish.js"
   },
   "devDependencies": {
     "@material-ui/core": "^4.12.1",
