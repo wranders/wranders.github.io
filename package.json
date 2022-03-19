@@ -17,8 +17,8 @@
   "private": true,
   "scripts": {
     "lint": "eslint src/**/*.{js,ts,tsx}",
-    "clean": "rimraf dist",
-    "precompilescripts": "rimraf scripts/bin",
+    "clean": "node -e \"require('fs').rm('dist',{recursive:true,force:true},()=>{});\"",
+    "precompilescripts": "node -e \"require('fs').rm('scripts/bin',{recursive:true,force:true},()=>{});\"",
     "compilescripts": "tsc --project scripts",
     "build:copy": "node scripts/bin/copy.js",
     "build:only": "node scripts/bin/build.js",
@@ -47,7 +47,6 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.2",
-    "rimraf": "^3.0.2",
     "typescript": "^4.6.2",
     "workbox-build": "^6.5.0"
   }
