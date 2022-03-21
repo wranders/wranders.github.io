@@ -50,7 +50,7 @@ export default function Navigation(): React.ReactElement {
           {
             icon: <LibraryBooksIcon />,
             label: 'Documentation',
-            href: 'https://www.doubleu.codes/docs',
+            href: 'https://docs.doubleu.codes/',
           },
         ]}
         copyright={{
