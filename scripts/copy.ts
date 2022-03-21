@@ -22,6 +22,7 @@ const CopyFiles: Copy = [
     // Copy web root files
     SrcDir: resolve('public'),
     Files: [
+      '.nojekyll',
       'browserconfig.xml',
       'CNAME',
       'keybase.txt',
