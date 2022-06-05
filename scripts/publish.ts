@@ -145,11 +145,10 @@ function cpR(src: string, dest: string): void {
 async function publish(): Promise<void> {
   const git = new Git();
   const gitUser = git.getUser();
-  let gitRepo = git.getRemoteUrl(options.remote);
+  const gitRepo = git.getRemoteUrl(options.remote);
   if (!gitRepo) {
     throw new Error('Failed to get remote URL');
   }
-  gitRepo = gitRepo as string;
   const clone = join(
     process.cwd(),
     'node_modules',
