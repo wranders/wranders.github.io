@@ -75,19 +75,21 @@ export default function NavDrawer({
   )();
   const HeadLink = React.useMemo(
     () =>
-      React.forwardRef(
-        (
-          linkProps,
-          ref /* eslint-disable-line @typescript-eslint/no-unused-vars */,
-        ) => (
-          <RouterLink
-            to={(header as NavDrawerHeaderLink).href as string}
-            {...linkProps}
-          />
-        ),
-      ),
+      React.forwardRef((linkProps) => (
+        <RouterLink
+          to={(header as NavDrawerHeaderLink).href as string}
+          {...linkProps}
+        />
+      )),
     [(header as NavDrawerHeaderLink).href],
   );
+
+  function GetHeaderIcon(
+    icon: React.ReactElement | undefined,
+  ): React.ReactElement | null {
+    if (icon === undefined) return null;
+    return <ListItemIcon>{icon}</ListItemIcon>;
+  }
 
   function CreateLinkList(
     links: Array<LinkListItem>,
@@ -112,6 +114,25 @@ export default function NavDrawer({
           </ListItem>
         ))}
       </List>
+    );
+  }
+
+  function GetCopyright(
+    entity: string,
+    link: string | undefined,
+  ): React.ReactElement {
+    if (link === undefined) {
+      return <Typography variant="inherit">{entity}</Typography>;
+    }
+    return (
+      <Link
+        color="inherit"
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {entity}
+      </Link>
     );
   }
 
@@ -141,9 +162,7 @@ export default function NavDrawer({
                     key={header.title}
                     component={HeadLink}
                   >
-                    {header.icon ? (
-                      <ListItemIcon>{header.icon}</ListItemIcon>
-                    ) : null}
+                    {GetHeaderIcon(header.icon)}
                     <ListItemText
                       primary={
                         <Typography variant="h5">{header.title}</Typography>
@@ -175,20 +194,7 @@ export default function NavDrawer({
                       Copyright &copy; {copyright.start}-{copyright.end}
                     </b>
                     &nbsp;
-                    {copyright.entityLink ? (
-                      <Link
-                        color="inherit"
-                        href={copyright.entityLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {copyright.entity}
-                      </Link>
-                    ) : (
-                      <Typography variant="inherit">
-                        {copyright.entity}
-                      </Typography>
-                    )}
+                    {GetCopyright(copyright.entity, copyright.entityLink)}
                   </Typography>
                 </div>
               ) : null}
