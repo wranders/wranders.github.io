@@ -1,10 +1,10 @@
 import React from 'react';
 
-export type TitleContext = {
+export type TitleContextType = {
   siteName: string;
   delim: string;
 };
 
-const TitleContext = React.createContext<TitleContext | null>(null);
+const TitleContext = React.createContext<TitleContextType | null>(null);
 
 export default TitleContext;
