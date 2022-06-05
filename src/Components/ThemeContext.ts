@@ -1,12 +1,12 @@
 import { ThemeOptions } from '@material-ui/core/styles';
 import React from 'react';
 
-export type ThemeContext = {
+export type ThemeContextType = {
   useDark: boolean;
   theme: ThemeOptions;
   toggle(): void;
 };
 
-const ThemeContext = React.createContext<ThemeContext | null>(null);
+const ThemeContext = React.createContext<ThemeContextType | null>(null);
 
 export default ThemeContext;
