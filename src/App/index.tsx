@@ -31,7 +31,7 @@ export default function App(): React.ReactElement {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/contact" element={<Contact />} />
-            <Route element={<E404 />} />
+            <Route path="*" element={<E404 />} />
           </Routes>
         </HashRouter>
       </TitleProvider>
