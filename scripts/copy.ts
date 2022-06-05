@@ -62,20 +62,18 @@ async function copy(): Promise<void> {
     if (!existsSync(fileGroup.OutDir))
       mkdirSync(fileGroup.OutDir, { recursive: true });
 
+    let files: string[];
+
     if (fileGroup.Files.length == 1 && fileGroup.Files[0] === '*') {
-      const files = readdirSync(fileGroup.SrcDir);
-      files.forEach((file) => {
-        const srcPath = resolve(fileGroup.SrcDir, file);
-        const destPath = resolve(fileGroup.OutDir, file);
-        writeFileSync(destPath, readFileSync(srcPath));
-      });
+      files = readdirSync(fileGroup.SrcDir);
     } else {
-      fileGroup.Files.forEach((file) => {
-        const srcPath = resolve(fileGroup.SrcDir, file);
-        const destPath = resolve(fileGroup.OutDir, file);
-        writeFileSync(destPath, readFileSync(srcPath));
-      });
+      files = fileGroup.Files;
     }
+    files.forEach((file: string) => {
+      const srcPath = resolve(fileGroup.SrcDir, file);
+      const destPath = resolve(fileGroup.OutDir, file);
+      writeFileSync(destPath, readFileSync(srcPath));
+    });
   });
 }
 copy().catch((msg) => {
