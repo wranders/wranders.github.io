@@ -11,10 +11,13 @@ export default function Title({ pageName }: TitleProps): null {
   const { delim, siteName } =
     ctx !== null ? ctx : { delim: DefaultDelim, siteName: undefined };
 
+  function GetTitle(): string {
+    if (siteName === 'undefined') return pageName;
+    return [pageName, delim, siteName].join(' ');
+  }
+
   React.useEffect(() => {
-    typeof siteName === 'undefined'
-      ? (document.title = pageName)
-      : (document.title = [pageName, delim, siteName].join(' '));
+    document.title = GetTitle();
   });
 
   return null;
