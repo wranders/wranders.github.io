@@ -37,17 +37,17 @@ export default function Theme({
   const [theme, setTheme] = React.useState<ThemeOptions>(appTheme);
   const [useDark, setUseDark] = React.useState<boolean>(false);
 
-  function SetPaletteType(useDark: boolean): void {
+  function SetPaletteType(isDark: boolean): void {
     const updatedTheme = {
       ...theme,
       palette: {
         ...theme.palette,
-        type: useDark ? ('dark' as PaletteType) : ('light' as PaletteType),
+        type: isDark ? ('dark' as PaletteType) : ('light' as PaletteType),
       },
     };
     setTheme(updatedTheme);
-    setUseDark(useDark);
-    if (darkModeKey) localStorage.setItem(darkModeKey, JSON.stringify(useDark));
+    setUseDark(isDark);
+    if (darkModeKey) localStorage.setItem(darkModeKey, JSON.stringify(isDark));
   }
 
   function TogglePaletteType() {
