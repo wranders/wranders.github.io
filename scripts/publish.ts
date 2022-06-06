@@ -113,27 +113,12 @@ class Git {
 
 //==============================================================================
 
-function filenameify(string: string): string {
-  // Adaptation of: https://github.com/sindresorhus/filenamify
-  string = string.normalize('NFD');
-  string = string.replace(/[<>:"/\\|?*\u0000-\u001F]/g, '!');
-  string = string.replace(/[\u0000-\u001F\u0080-\u009F]/g, '!');
-  string = string.replace(/^\.+/, '!');
-  string = string.replace(/\.+$/, '');
-  string = string.replace(/(?:\!){2,}/g, '!');
-  string = /^(con|prn|aux|nul|com\d|lpt\d)$/i.test(string)
-    ? string + '!'
-    : string;
-  return string;
-}
-
 function cpR(src: string, dest: string): void {
   if (existsSync(src)) {
     const stats = statSync(src);
     if (stats.isDirectory()) {
       mkdirSync(dest, { recursive: true });
       readdirSync(src).forEach((item) => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         cpR(join(src, item), join(dest, item));
       });
     } else {
@@ -149,13 +134,7 @@ async function publish(): Promise<void> {
   if (!gitRepo) {
     throw new Error('Failed to get remote URL');
   }
-  const clone = join(
-    process.cwd(),
-    'node_modules',
-    '.cache',
-    'gh-pages',
-    filenameify(gitRepo),
-  );
+  const clone = join(process.cwd(), 'node_modules', '.cache', 'gh-pages');
 
   console.log('Cloning %s into %s', gitRepo, clone);
   git.clone(gitRepo, clone, options.pagesBranch);
