@@ -8,6 +8,7 @@ import {
   rmSync,
   statSync,
 } from 'fs';
+import { sync as whichsync } from 'which';
 
 const options = {
   remote: 'origin',
@@ -25,14 +26,19 @@ type GitUser = {
 
 class Git {
   cwd: string;
+  gitExec: string;
 
   constructor(cwd?: string) {
     this.cwd = cwd || process.cwd();
+    this.gitExec = whichsync('git');
   }
 
   getUser(): GitUser {
-    const gitUserName = spawnSync('git', ['config', 'user.name']).stdout;
-    const gitUserEmail = spawnSync('git', ['config', 'user.email']).stdout;
+    const gitUserName = spawnSync(this.gitExec, ['config', 'user.name']).stdout;
+    const gitUserEmail = spawnSync(this.gitExec, [
+      'config',
+      'user.email',
+    ]).stdout;
     return {
       name: gitUserName.toString().trim(),
       email: gitUserEmail.toString().trim(),
@@ -41,7 +47,7 @@ class Git {
 
   getRemoteUrl(remote: string): string | undefined {
     const args = ['config', '--get', 'remote.' + remote + '.url'];
-    return spawnSync('git', args)
+    return spawnSync(this.gitExec, args)
       .stdout.toString()
       .split(/[\n\r]/)
       .shift();
@@ -61,53 +67,69 @@ class Git {
       '--depth',
       '1',
     ];
-    spawnSync('git', args);
+    spawnSync(this.gitExec, args);
   }
 
   clean(): void {
-    spawnSync('git', ['clean', '-f', '-d'], { cwd: this.cwd });
+    spawnSync(this.gitExec, ['clean', '-f', '-d'], { cwd: this.cwd });
   }
 
   fetch(remote: string): void {
-    spawnSync('git', ['fetch', remote], { cwd: this.cwd });
+    spawnSync(this.gitExec, ['fetch', remote], { cwd: this.cwd });
   }
 
   checkout(remote: string, branch: string): void {
     const tree = remote + '/' + branch;
-    const status = spawnSync('git', ['ls-remote', '--exit-code', '.', tree], {
-      cwd: this.cwd,
-    }).status;
+    const status = spawnSync(
+      this.gitExec,
+      ['ls-remote', '--exit-code', '.', tree],
+      {
+        cwd: this.cwd,
+      },
+    ).status;
     if (status === 2) {
-      spawnSync('git', ['checkout', '--orphan', branch], { cwd: this.cwd });
+      spawnSync(this.gitExec, ['checkout', '--orphan', branch], {
+        cwd: this.cwd,
+      });
     }
   }
 
   rm(files: string[]): void {
-    spawnSync('git', ['rm', '--ignore-unmatch', '-r', '-f', ...files], {
+    spawnSync(this.gitExec, ['rm', '--ignore-unmatch', '-r', '-f', ...files], {
       cwd: this.cwd,
     });
   }
 
   add(files: string[]): void {
-    spawnSync('git', ['add', ...files], { cwd: this.cwd });
+    spawnSync(this.gitExec, ['add', ...files], { cwd: this.cwd });
   }
 
   setUser(user: GitUser): void {
-    spawnSync('git', ['config', 'user.name', user.name], { cwd: this.cwd });
-    spawnSync('git', ['config', 'user.email', user.email], { cwd: this.cwd });
+    spawnSync(this.gitExec, ['config', 'user.name', user.name], {
+      cwd: this.cwd,
+    });
+    spawnSync(this.gitExec, ['config', 'user.email', user.email], {
+      cwd: this.cwd,
+    });
   }
 
   commit(message: string): void {
-    const isChanged = spawnSync('git', ['diff-index', '--quiet', 'HEAD'], {
-      cwd: this.cwd,
-    }).status;
+    const isChanged = spawnSync(
+      this.gitExec,
+      ['diff-index', '--quiet', 'HEAD'],
+      {
+        cwd: this.cwd,
+      },
+    ).status;
     if (isChanged !== 0) {
-      spawnSync('git', ['commit', '-m', message], { cwd: this.cwd });
+      spawnSync(this.gitExec, ['commit', '-m', message], { cwd: this.cwd });
     }
   }
 
   push(remote: string, branch: string): void {
-    spawnSync('git', ['push', '--tags', remote, branch], { cwd: this.cwd });
+    spawnSync(this.gitExec, ['push', '--tags', remote, branch], {
+      cwd: this.cwd,
+    });
   }
 }
 
