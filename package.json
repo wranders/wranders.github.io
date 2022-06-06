@@ -16,7 +16,7 @@
   },
   "private": true,
   "scripts": {
-    "lint": "eslint src/**/*.{js,ts,tsx}",
+    "lint": "eslint scripts/*.ts src/**/*.{ts,tsx}",
     "clean": "node -e \"require('fs').rm('dist',{recursive:true,force:true},()=>{});\"",
     "precompilescripts": "node -e \"require('fs').rm('scripts/bin',{recursive:true,force:true},()=>{});\"",
     "compilescripts": "tsc --project scripts",
