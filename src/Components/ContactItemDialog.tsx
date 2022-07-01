@@ -1,30 +1,42 @@
-import IconButton from '@material-ui/core/IconButton';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import { MenuProps } from '@material-ui/core/Menu';
+import {
+  IconButton,
+  ListItem,
+  ListItemAvatar,
+  ListItemSecondaryAction,
+  ListItemText,
+} from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import React from 'react';
+import { ContactItemMenuProps, ContactItemProps } from './ContactItem';
 
-export interface ContactItemMenuProps extends MenuProps {
-  snackbarFunc?(message: string): void;
+export interface ContactItemDialogMenuProps extends ContactItemMenuProps {
+  dialogTitleFunc(title: string): void;
+  dialogContentFunc(content: string): void;
+  dialogActionFunc(
+    actions: React.ReactElement | Array<React.ReactElement>,
+  ): void;
+  dialogCloseFunc(): void;
+  dialogOpenFunc(): void;
 }
 
-export interface ContactItemProps extends ContactItemMenuProps {
-  avatar: React.ReactElement;
-  primaryText: string;
-  secondaryText: string;
-  menu: React.ElementType<ContactItemMenuProps>;
+export interface ContactItemDialogProps
+  extends Omit<ContactItemProps, 'menu'>,
+    ContactItemDialogMenuProps {
+  menu: React.ElementType<ContactItemDialogMenuProps>;
 }
 
-export default function ContactItem({
+export default function ContactItemDialog({
   avatar,
   primaryText,
   secondaryText,
   menu,
   snackbarFunc,
-}: Omit<ContactItemProps, 'open'>): React.ReactElement {
+  dialogTitleFunc,
+  dialogContentFunc,
+  dialogActionFunc,
+  dialogCloseFunc,
+  dialogOpenFunc,
+}: Omit<ContactItemDialogProps, 'open'>): React.ReactElement {
   const [anchorElement, setAnchorElement] = React.useState<Element | null>(
     null,
   );
@@ -56,6 +68,11 @@ export default function ContactItem({
           open={open}
           onClose={handleMenuClose}
           snackbarFunc={snackbarFunc}
+          dialogTitleFunc={dialogTitleFunc}
+          dialogContentFunc={dialogContentFunc}
+          dialogActionFunc={dialogActionFunc}
+          dialogCloseFunc={dialogCloseFunc}
+          dialogOpenFunc={dialogOpenFunc}
         />
       </ListItemSecondaryAction>
     </ListItem>

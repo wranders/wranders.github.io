@@ -1,4 +1,4 @@
-import { ContactItemMenuDialogProps } from '@Components/ContactItem';
+import { ContactItemDialogMenuProps } from '@Components/ContactItemDialog';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -15,7 +15,7 @@ export default function PGPMenu({
   dialogActionFunc,
   dialogOpenFunc,
   dialogCloseFunc,
-}: ContactItemMenuDialogProps): React.ReactElement {
+}: ContactItemDialogMenuProps): React.ReactElement {
   const [dialogContent, setDialogContent] = React.useState<string | undefined>(
     undefined,
   );
@@ -46,9 +46,9 @@ export default function PGPMenu({
   }
 
   function ViewKeyDialog(): void {
-    if (dialogTitleFunc) dialogTitleFunc('PGP Key');
+    dialogTitleFunc('PGP Key');
     if (typeof dialogContent === 'undefined') {
-      if (dialogContentFunc) dialogContentFunc('Loading...');
+      dialogContentFunc('Loading...');
       fetch(info.pgp.file)
         .then((resp) => {
           if (!resp.ok) throw new Error(resp.statusText);
@@ -56,24 +56,23 @@ export default function PGPMenu({
         })
         .then((text) => {
           setDialogContent(text);
-          if (dialogContentFunc) dialogContentFunc(text);
+          dialogContentFunc(text);
         })
         .catch((err) => {
           const errMsg = 'There was an error fetching the PGP key:\n' + err;
-          if (dialogContentFunc) dialogContentFunc(errMsg);
+          dialogContentFunc(errMsg);
           console.error(err);
         });
     } else {
-      if (dialogContentFunc) dialogContentFunc(dialogContent);
+      dialogContentFunc(dialogContent);
     }
-    if (dialogActionFunc)
-      dialogActionFunc(
-        <Button variant="contained" color="primary" onClick={CopyKeyContent}>
-          Copy
-        </Button>,
-      );
+    dialogActionFunc(
+      <Button variant="contained" color="primary" onClick={CopyKeyContent}>
+        Copy
+      </Button>,
+    );
     if (onClose) onClose({}, 'backdropClick');
-    if (dialogOpenFunc) dialogOpenFunc();
+    dialogOpenFunc();
   }
 
   return (

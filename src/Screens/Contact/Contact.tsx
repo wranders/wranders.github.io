@@ -1,4 +1,5 @@
 import ContactItem from '@Components/ContactItem';
+import ContactItemDialog from '@Components/ContactItemDialog';
 import Title from '@Components/Title';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -122,7 +123,7 @@ export default function Contact(): React.ReactElement {
             snackbarFunc={handleSnackbarOpen}
           />
           <Divider />
-          <ContactItem
+          <ContactItemDialog
             avatar={
               <Avatar alt="PGP" className={classes.green}>
                 <VpnKeyIcon />
