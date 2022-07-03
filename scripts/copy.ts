@@ -9,19 +9,19 @@ import { resolve } from 'path';
 
 //==============================================================================
 
-const WebRoot = resolve('dist');
+const webRoot = resolve('dist');
 
-const CopyFiles: Copy = [
+const copyFiles: Copy = [
   {
     // Copy repository files
-    SrcDir: '.',
-    Files: ['LICENSE', 'README.md'],
-    OutDir: WebRoot,
+    srcDir: '.',
+    files: ['LICENSE', 'README.md'],
+    outDir: webRoot,
   },
   {
     // Copy web root files
-    SrcDir: resolve('public'),
-    Files: [
+    srcDir: resolve('public'),
+    files: [
       '.nojekyll',
       'browserconfig.xml',
       'CNAME',
@@ -29,49 +29,49 @@ const CopyFiles: Copy = [
       'pgp_pubkey.asc',
       'site.webmanifest',
     ],
-    OutDir: WebRoot,
+    outDir: webRoot,
   },
   {
     // Copy icons
-    SrcDir: resolve('public', 'icons'),
-    Files: ['*'],
-    OutDir: resolve(WebRoot, 'static', 'icons'),
+    srcDir: resolve('public', 'icons'),
+    files: ['*'],
+    outDir: resolve(webRoot, 'static', 'icons'),
   },
   {
     // Copy images
-    SrcDir: resolve('public', 'images'),
-    Files: ['*'],
-    OutDir: resolve(WebRoot, 'static', 'images'),
+    srcDir: resolve('public', 'images'),
+    files: ['*'],
+    outDir: resolve(webRoot, 'static', 'images'),
   },
 ];
 
 //==============================================================================
 
 type CopyDir = {
-  SrcDir: string;
-  Files: string[];
-  OutDir: string;
+  srcDir: string;
+  files: string[];
+  outDir: string;
 };
 
 type Copy = CopyDir[];
 
 async function copy(): Promise<void> {
-  if (!existsSync(WebRoot)) mkdirSync(WebRoot);
+  if (!existsSync(webRoot)) mkdirSync(webRoot);
 
-  CopyFiles.forEach((fileGroup: CopyDir) => {
-    if (!existsSync(fileGroup.OutDir))
-      mkdirSync(fileGroup.OutDir, { recursive: true });
+  copyFiles.forEach((fileGroup: CopyDir) => {
+    if (!existsSync(fileGroup.outDir))
+      mkdirSync(fileGroup.outDir, { recursive: true });
 
     let files: string[];
 
-    if (fileGroup.Files.length === 1 && fileGroup.Files[0] === '*') {
-      files = readdirSync(fileGroup.SrcDir);
+    if (fileGroup.files.length === 1 && fileGroup.files[0] === '*') {
+      files = readdirSync(fileGroup.srcDir);
     } else {
-      files = fileGroup.Files;
+      files = fileGroup.files;
     }
     files.forEach((file: string) => {
-      const srcPath = resolve(fileGroup.SrcDir, file);
-      const destPath = resolve(fileGroup.OutDir, file);
+      const srcPath = resolve(fileGroup.srcDir, file);
+      const destPath = resolve(fileGroup.outDir, file);
       writeFileSync(destPath, readFileSync(srcPath));
     });
   });
