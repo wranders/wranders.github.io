@@ -1,6 +1,6 @@
 import { PaletteType } from '@material-ui/core';
 import {
-  createMuiTheme,
+  createTheme,
   ThemeOptions,
   ThemeProvider,
 } from '@material-ui/core/styles';
@@ -73,7 +73,7 @@ export default function Theme({
     }
   }, [mounted]);
 
-  const compiledTheme = createMuiTheme(theme);
+  const compiledTheme = createTheme(theme);
 
   if (!mounted) return <div />;
 
