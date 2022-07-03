@@ -64,7 +64,7 @@ async function copy(): Promise<void> {
 
     let files: string[];
 
-    if (fileGroup.Files.length == 1 && fileGroup.Files[0] === '*') {
+    if (fileGroup.Files.length === 1 && fileGroup.Files[0] === '*') {
       files = readdirSync(fileGroup.SrcDir);
     } else {
       files = fileGroup.Files;
