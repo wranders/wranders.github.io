@@ -3,6 +3,7 @@
     "build.ts",
     "copy.ts",
     "publish.ts",
+    "util/copy.ts",
   ],
   "compilerOptions": {
     "target": "ESNext",

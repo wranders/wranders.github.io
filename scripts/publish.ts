@@ -1,14 +1,8 @@
 import { spawnSync } from 'child_process';
 import { join, dirname, resolve } from 'path';
-import {
-  copyFileSync,
-  existsSync,
-  mkdirSync,
-  readdirSync,
-  rmSync,
-  statSync,
-} from 'fs';
 import { sync as whichsync } from 'which';
+import { mkdirSync, rmSync } from 'fs';
+import { recurse as copyRecurse } from './util/copy';
 
 const options = {
   remote: 'origin',
@@ -135,20 +129,6 @@ class Git {
 
 //==============================================================================
 
-function cpR(src: string, dest: string): void {
-  if (existsSync(src)) {
-    const stats = statSync(src);
-    if (stats.isDirectory()) {
-      mkdirSync(dest, { recursive: true });
-      readdirSync(src).forEach((item) => {
-        cpR(join(src, item), join(dest, item));
-      });
-    } else {
-      copyFileSync(src, dest);
-    }
-  }
-}
-
 async function publish(): Promise<void> {
   const git = new Git();
   const gitUser = git.getUser();
@@ -176,7 +156,7 @@ async function publish(): Promise<void> {
   cloneGit.rm(['*']);
 
   console.log('Copying files');
-  cpR(join(process.cwd(), options.dist), clone);
+  copyRecurse(join(process.cwd(), options.dist), clone);
 
   console.log('Adding all');
   cloneGit.add(['.']);
