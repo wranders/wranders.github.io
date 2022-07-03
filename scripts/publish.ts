@@ -1,8 +1,8 @@
 import { spawnSync } from 'child_process';
 import { join, dirname, resolve } from 'path';
-import { sync as whichsync } from 'which';
 import { mkdirSync, rmSync } from 'fs';
 import { recurse as copyRecurse } from './util/copy';
+import which from './util/which';
 
 const options = {
   remote: 'origin',
@@ -24,7 +24,7 @@ class Git {
 
   constructor(cwd?: string) {
     this.cwd = cwd || process.cwd();
-    this.gitExec = whichsync('git');
+    this.gitExec = which('git');
   }
 
   getUser(): GitUser {
