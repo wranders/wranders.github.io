@@ -1,14 +1,7 @@
 import ContactItem from '@Components/ContactItem';
-import ContactItemDialog from '@Components/ContactItemDialog';
 import Title from '@Components/Title';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
@@ -65,10 +58,6 @@ export default function Contact(): React.ReactElement {
       snackbarClose: {
         padding: theme.spacing(0.5),
       },
-      keyContent: {
-        fontFamily: 'monospace',
-        whiteSpace: 'pre',
-      },
     }),
   )();
   const snackbarRef = React.useState<Array<SnackbarEntry>>([])[0];
@@ -76,12 +65,6 @@ export default function Contact(): React.ReactElement {
   const [snackbarInfo, setSnackbarInfo] = React.useState<
     SnackbarEntry | undefined
   >(undefined);
-  const [dialogTitle, setDialogTitle] = React.useState<string | null>(null);
-  const [dialogContent, setDialogContent] = React.useState<string | null>(null);
-  const [dialogActions, setDialogActions] = React.useState<
-    React.ReactElement | Array<React.ReactElement>
-  >([]);
-  const [dialogOpen, setDialogOpen] = React.useState<boolean>(false);
 
   function processSnackbarQueue(): void {
     if (snackbarRef.length > 0) {
@@ -123,7 +106,7 @@ export default function Contact(): React.ReactElement {
             snackbarFunc={handleSnackbarOpen}
           />
           <Divider />
-          <ContactItemDialog
+          <ContactItem
             avatar={
               <Avatar alt="PGP" className={classes.green}>
                 <VpnKeyIcon />
@@ -133,11 +116,6 @@ export default function Contact(): React.ReactElement {
             secondaryText={info.pgp.fingerprint}
             menu={PGPMenu}
             snackbarFunc={handleSnackbarOpen}
-            dialogTitleFunc={setDialogTitle}
-            dialogContentFunc={setDialogContent}
-            dialogActionFunc={setDialogActions}
-            dialogCloseFunc={() => setDialogOpen(false)}
-            dialogOpenFunc={() => setDialogOpen(true)}
           />
           <Divider />
           <ContactItem
@@ -181,28 +159,6 @@ export default function Contact(): React.ReactElement {
           </IconButton>
         }
       />
-      <Dialog
-        onClose={() => setDialogOpen(false)}
-        open={dialogOpen}
-        maxWidth={false}
-      >
-        <DialogTitle>{dialogTitle}</DialogTitle>
-        <DialogContent dividers>
-          <DialogContentText className={classes.keyContent}>
-            {dialogContent}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          {dialogActions}
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => setDialogOpen(false)}
-          >
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
     </main>
   );
 }
