@@ -1,5 +1,3 @@
-import ContactItem from '@Components/ContactItem';
-import Title from '@Components/Title';
 import {
   Avatar,
   Container,
@@ -12,6 +10,9 @@ import {
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Close, Email, VpnKey } from '@material-ui/icons';
 import React from 'react';
+
+import ContactItem from '@Components/ContactItem';
+import Title from '@Components/Title';
 import DiscordMenu from './DiscordMenu';
 import EmailMenu from './EmailMenu';
 import KeyBaseMenu from './KeyBaseMenu';

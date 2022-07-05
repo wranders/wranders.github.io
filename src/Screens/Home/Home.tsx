@@ -1,4 +1,3 @@
-import Title from '@Components/Title';
 import {
   Container,
   Divider,
@@ -10,6 +9,8 @@ import {
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { NewReleases } from '@material-ui/icons';
 import React from 'react';
+
+import Title from '@Components/Title';
 import TitleCard from './TitleCard';
 
 export default function Home(): React.ReactElement {

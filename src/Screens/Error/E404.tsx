@@ -1,7 +1,8 @@
-import Title from '@Components/Title';
 import { Container, Typography } from '@material-ui/core';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+
+import Title from '@Components/Title';
 
 export default function E404(): React.ReactElement {
   const location = useLocation();

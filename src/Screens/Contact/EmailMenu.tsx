@@ -1,6 +1,7 @@
-import { ContactItemMenuProps } from '@Components/ContactItem';
 import { Menu, MenuItem } from '@material-ui/core';
 import React from 'react';
+
+import { ContactItemMenuProps } from '@Components/ContactItem';
 import { info } from './Contact';
 
 export default function EmailMenu({

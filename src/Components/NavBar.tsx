@@ -2,6 +2,7 @@ import { AppBar, IconButton, Toolbar, Tooltip } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Brightness4, BrightnessHigh, GitHub, Menu } from '@material-ui/icons';
 import React from 'react';
+
 import { NavDrawerContext, NavDrawerContextConsumer } from './NavDrawerContext';
 import ThemeContext from './ThemeContext';
 
