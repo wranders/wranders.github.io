@@ -2,7 +2,6 @@ import { basename, extname, join, resolve } from 'path';
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import { build } from 'esbuild';
 import { compileFile } from 'pug';
-import { generateSW } from 'workbox-build';
 
 //==============================================================================
 
@@ -40,12 +39,6 @@ async function buildApp(): Promise<void> {
     join(WebRoot, basename(PugEntrypoint, extname(PugEntrypoint)) + '.html'),
     compileFile(PugEntrypoint)(),
   );
-
-  // Build Service-Worker
-  await generateSW({
-    swDest: resolve(WebRoot, 'sw.js'),
-    globDirectory: WebRoot,
-  });
 }
 buildApp().catch((msg) => {
   console.error(`\n${msg}\n`);

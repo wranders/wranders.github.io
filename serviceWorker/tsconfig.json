@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "strict": true,
+    "rootDir": ".",
+    "lib": [
+      "ESNext",
+      "WebWorker",
+    ],
+    "skipLibCheck": true,
+  }
+}

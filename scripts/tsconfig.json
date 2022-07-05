@@ -1,6 +1,7 @@
 {
   "files": [
     "build.ts",
+    "build.sw.ts",
     "copy.ts",
     "publish.ts",
     "util/copy.ts",
