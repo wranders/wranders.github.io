@@ -53,6 +53,8 @@ sw.addEventListener('fetch', (event: FetchEvent) => {
 });
 
 sw.addEventListener('install', () => {
+  // This variable is substituted in the build process.
+  // All index files and assets in the 'static' directory are cached.
   const resources = [`${1}`];
   caches.open(CACHEKEY).then((cache) => {
     cache.addAll(resources);

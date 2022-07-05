@@ -38,6 +38,7 @@ async function buildSW(): Promise<void> {
   );
 
   const rawSW = readFileSync(resolve(swEntrypoint)).toString();
+  // Replace the variable placeholder in sw.ts with the real data.
   const genSW = rawSW.replace(/\[\`\$\{1\}\`\]/, JSON.stringify(precache));
 
   writeFileSync(swGenerated, genSW);
