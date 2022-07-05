@@ -98,7 +98,7 @@ function PGPDialog({
     }),
   )();
   const [dialogContent, setDialogContent] =
-    React.useState<string>('.undefined.');
+    React.useState<string>('Loading...');
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
 
   React.useEffect(() => {
@@ -131,7 +131,7 @@ function PGPDialog({
       <DialogTitle>PGP Key</DialogTitle>
       <DialogContent dividers>
         <DialogContentText className={classes.keyContent}>
-          {isLoading ? 'Loading...' : dialogContent}
+          {dialogContent}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
