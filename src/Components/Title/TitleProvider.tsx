@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TitleContext from '@Components/TitleContext';
+import TitleContext from './TitleContext';
 
 export const DefaultDelim = '|';
 
