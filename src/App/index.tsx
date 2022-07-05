@@ -3,7 +3,7 @@ import { ThemeOptions } from '@material-ui/core/styles';
 import React from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 
-import Theme from '@Components/Theme';
+import Theme from './Theme';
 import { TitleProvider } from '@Components/Title';
 import Contact from '@Screens/Contact/Contact';
 import E404 from '@Screens/Error/E404';

@@ -2,9 +2,9 @@ import { Avatar } from '@material-ui/core';
 import { AlternateEmail, GitHub, Home, LibraryBooks } from '@material-ui/icons';
 import React from 'react';
 
-import NavBar from '@Components/NavBar';
-import NavDrawer from '@Components/NavDrawer';
-import { NavDrawerContextProvider } from '@Components/NavDrawerContext';
+import NavBar from './NavBar';
+import NavDrawer from './NavDrawer';
+import { NavDrawerContextProvider } from './NavDrawerContext';
 
 export default function Navigation(): React.ReactElement {
   const [drawerOpen, setDrawerOpen] = React.useState<boolean>(false);
