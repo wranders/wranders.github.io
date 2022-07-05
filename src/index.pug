@@ -32,11 +32,4 @@ html(lang='en')
           h2(style='text-align:center'): noscript Javascript is required to view this application
     script(src='./index.js' type='module')
     script.
-      if('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
-          .then(() => {
-            console.log('ServiceWorker registered');
-          });
-        });
-      }
+      if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js').then(()=>{console.log('ServiceWorker registered');})})}
