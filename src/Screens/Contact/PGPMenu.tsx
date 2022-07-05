@@ -20,33 +20,7 @@ export default function PGPMenu({
   onClose,
   snackbarFunc,
 }: ContactItemMenuProps): React.ReactElement {
-  const classes = makeStyles(() =>
-    createStyles({
-      keyContent: {
-        fontFamily: 'monospace',
-        whiteSpace: 'pre',
-      },
-    }),
-  )();
-  const [dialogContent, setDialogContent] = React.useState<string | null>(null);
   const [dialogOpen, setDialogOpen] = React.useState<boolean>(false);
-
-  React.useEffect(() => {
-    setDialogContent('Loading...');
-    fetch(info.pgp.file)
-      .then((resp) => {
-        if (!resp.ok) throw new Error(resp.statusText);
-        return resp.text();
-      })
-      .then((text) => {
-        setDialogContent(text);
-      })
-      .catch((err) => {
-        const errMsg = 'There was an error fetching the PGP key:\n' + err;
-        setDialogContent(errMsg);
-        console.error(err);
-      });
-  }, [dialogContent]);
 
   function CopyFingerprint(): void {
     navigator.clipboard.writeText(info.pgp.fingerprint);
@@ -60,12 +34,6 @@ export default function PGPMenu({
     );
     if (snackbarFunc) snackbarFunc('PGP Fingerprint (0x) Copied to Clipboard');
     if (onClose) onClose({}, 'backdropClick');
-  }
-
-  function CopyKeyContent(): void {
-    navigator.clipboard.writeText(dialogContent as string);
-    if (snackbarFunc) snackbarFunc('PGP Public Key Copied to Clipboard');
-    setDialogOpen(false);
   }
 
   function DownloadASC(): void {
@@ -99,30 +67,85 @@ export default function PGPMenu({
           View Key
         </MenuItem>
       </Menu>
-      <Dialog
-        onClose={() => setDialogOpen(false)}
+      <PGPDialog
         open={dialogOpen}
-        maxWidth={false}
-      >
-        <DialogTitle>PGP Key</DialogTitle>
-        <DialogContent dividers>
-          <DialogContentText className={classes.keyContent}>
-            {dialogContent}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button variant="contained" color="primary" onClick={CopyKeyContent}>
-            Copy
-          </Button>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => setDialogOpen(false)}
-          >
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
+        setDialogOpen={setDialogOpen}
+        snackbarFunc={snackbarFunc}
+      />
     </div>
+  );
+}
+
+//##############################################################################
+
+type PGPDialogProps = {
+  open: boolean;
+  setDialogOpen(value: React.SetStateAction<boolean>): void;
+  snackbarFunc?(message: string): void;
+};
+
+function PGPDialog({
+  open,
+  setDialogOpen,
+  snackbarFunc,
+}: PGPDialogProps): React.ReactElement {
+  const classes = makeStyles(() =>
+    createStyles({
+      keyContent: {
+        fontFamily: 'monospace',
+        whiteSpace: 'pre',
+      },
+    }),
+  )();
+  const [dialogContent, setDialogContent] =
+    React.useState<string>('.undefined.');
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
+
+  React.useEffect(() => {
+    if (!isLoading) return;
+    fetch(info.pgp.file)
+      .then((resp) => {
+        if (!resp.ok) throw new Error(resp.statusText);
+        return resp.text();
+      })
+      .then((text) => {
+        setDialogContent(text);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        const errMsg = 'There was an error fetching the PGP key:\n' + err;
+        setDialogContent(errMsg);
+        setIsLoading(false);
+        console.error(err);
+      });
+  }, [dialogContent]);
+
+  function CopyKeyContent(): void {
+    navigator.clipboard.writeText(dialogContent);
+    if (snackbarFunc) snackbarFunc('PGP Public Key Copied to Clipboard');
+    setDialogOpen(false);
+  }
+
+  return (
+    <Dialog onClose={() => setDialogOpen(false)} open={open} maxWidth={false}>
+      <DialogTitle>PGP Key</DialogTitle>
+      <DialogContent dividers>
+        <DialogContentText className={classes.keyContent}>
+          {isLoading ? 'Loading...' : dialogContent}
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button variant="contained" color="primary" onClick={CopyKeyContent}>
+          Copy
+        </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => setDialogOpen(false)}
+        >
+          Close
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 }
