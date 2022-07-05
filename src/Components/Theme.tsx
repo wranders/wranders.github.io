@@ -1,4 +1,4 @@
-import { PaletteType } from '@material-ui/core';
+import { useMediaQuery, CssBaseline, PaletteType } from '@material-ui/core';
 import {
   createTheme,
   ThemeOptions,
@@ -6,8 +6,6 @@ import {
 } from '@material-ui/core/styles';
 import { PaletteOptions } from '@material-ui/core/styles/createPalette';
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import React from 'react';
 import ThemeContext from './ThemeContext';
 

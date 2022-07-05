@@ -1,11 +1,8 @@
 import NavBar from '@Components/NavBar';
 import NavDrawer from '@Components/NavDrawer';
 import { NavDrawerContextProvider } from '@Components/NavDrawerContext';
-import Avatar from '@material-ui/core/Avatar';
-import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
-import GithubIcon from '@material-ui/icons/GitHub';
-import HomeIcon from '@material-ui/icons/Home';
-import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import { Avatar } from '@material-ui/core';
+import { AlternateEmail, GitHub, Home, LibraryBooks } from '@material-ui/icons';
 import React from 'react';
 
 export default function Navigation(): React.ReactElement {
@@ -32,23 +29,23 @@ export default function Navigation(): React.ReactElement {
         internalLinks={[
           {
             href: '/',
-            icon: <HomeIcon />,
+            icon: <Home />,
             label: 'Home',
           },
           {
             href: '/contact',
-            icon: <AlternateEmailIcon />,
+            icon: <AlternateEmail />,
             label: 'Contact',
           },
         ]}
         externalLinks={[
           {
-            icon: <GithubIcon />,
+            icon: <GitHub />,
             label: 'Github',
             href: 'https://github.com/wranders',
           },
           {
-            icon: <LibraryBooksIcon />,
+            icon: <LibraryBooks />,
             label: 'Documentation',
             href: 'https://docs.doubleu.codes/',
           },

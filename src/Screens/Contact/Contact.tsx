@@ -1,16 +1,16 @@
 import ContactItem from '@Components/ContactItem';
 import Title from '@Components/Title';
-import Avatar from '@material-ui/core/Avatar';
-import Container from '@material-ui/core/Container';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
-import Snackbar from '@material-ui/core/Snackbar';
+import {
+  Avatar,
+  Container,
+  Divider,
+  IconButton,
+  List,
+  Snackbar,
+  Typography,
+} from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import CloseIcon from '@material-ui/icons/Close';
-import EmailIcon from '@material-ui/icons/Email';
-import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import { Close, Email, VpnKey } from '@material-ui/icons';
 import React from 'react';
 import DiscordMenu from './DiscordMenu';
 import EmailMenu from './EmailMenu';
@@ -97,7 +97,7 @@ export default function Contact(): React.ReactElement {
           <ContactItem
             avatar={
               <Avatar alt="Email" className={classes.green}>
-                <EmailIcon />
+                <Email />
               </Avatar>
             }
             primaryText="Email"
@@ -109,7 +109,7 @@ export default function Contact(): React.ReactElement {
           <ContactItem
             avatar={
               <Avatar alt="PGP" className={classes.green}>
-                <VpnKeyIcon />
+                <VpnKey />
               </Avatar>
             }
             primaryText="PGP"
@@ -155,7 +155,7 @@ export default function Contact(): React.ReactElement {
             className={classes.snackbarClose}
             onClick={() => setSnackbarOpen(false)}
           >
-            <CloseIcon />
+            <Close />
           </IconButton>
         }
       />

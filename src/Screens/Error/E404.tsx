@@ -1,6 +1,5 @@
 import Title from '@Components/Title';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
+import { Container, Typography } from '@material-ui/core';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 

@@ -1,10 +1,12 @@
-import IconButton from '@material-ui/core/IconButton';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import { MenuProps } from '@material-ui/core/Menu';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import {
+  IconButton,
+  ListItem,
+  ListItemAvatar,
+  ListItemSecondaryAction,
+  ListItemText,
+  MenuProps,
+} from '@material-ui/core';
+import { MoreVert } from '@material-ui/icons';
 import React from 'react';
 
 export interface ContactItemMenuProps extends MenuProps {
@@ -49,7 +51,7 @@ export default function ContactItem({
       <ListItemText primary={primaryText} secondary={secondaryText} />
       <ListItemSecondaryAction>
         <IconButton edge="end" onClick={handleMenuOpen}>
-          <MoreVertIcon />
+          <MoreVert />
         </IconButton>
         <ItemMenu
           anchorEl={anchorElement}

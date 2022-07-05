@@ -1,10 +1,6 @@
-import { Paper } from '@material-ui/core';
-import Avatar from '@material-ui/core/Avatar';
-import Container from '@material-ui/core/Container';
-import Icon from '@material-ui/core/Icon';
+import { Avatar, Container, Icon, Paper, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import { ArrowDownward } from '@material-ui/icons';
 import React from 'react';
 
 const imgBG = '/static/images/circuit-board.svg';
@@ -106,7 +102,7 @@ export default function TitleCard(): React.ReactElement {
         <div className={classes.backdrop} />
         <div className={classes.background} />
         <Icon className={classes.arrowDown}>
-          <ArrowDownwardIcon />
+          <ArrowDownward />
         </Icon>
       </Container>
     </section>

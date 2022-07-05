@@ -1,12 +1,14 @@
 import Title from '@Components/Title';
+import {
+  Container,
+  Divider,
+  Grid,
+  Icon,
+  Paper,
+  Typography,
+} from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
-import Icon from '@material-ui/core/Icon';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import NewReleasesIcon from '@material-ui/icons/NewReleases';
+import { NewReleases } from '@material-ui/icons';
 import React from 'react';
 import TitleCard from './TitleCard';
 
@@ -41,7 +43,7 @@ export default function Home(): React.ReactElement {
             <Grid container wrap="nowrap" spacing={2}>
               <Grid item>
                 <Icon>
-                  <NewReleasesIcon />
+                  <NewReleases />
                 </Icon>
               </Grid>
               <Grid item xs>

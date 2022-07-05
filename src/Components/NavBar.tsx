@@ -1,12 +1,6 @@
-import AppBar from '@material-ui/core/AppBar';
-import IconButton from '@material-ui/core/IconButton';
+import { AppBar, IconButton, Toolbar, Tooltip } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
-import Tooltip from '@material-ui/core/Tooltip';
-import Brightness4Icon from '@material-ui/icons/Brightness4';
-import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh';
-import GithubIcon from '@material-ui/icons/GitHub';
-import MenuIcon from '@material-ui/icons/Menu';
+import { Brightness4, BrightnessHigh, GitHub, Menu } from '@material-ui/icons';
 import React from 'react';
 import { NavDrawerContext, NavDrawerContextConsumer } from './NavDrawerContext';
 import ThemeContext from './ThemeContext';
@@ -19,7 +13,7 @@ function ThemeToggle(): React.ReactElement {
   return (
     <Tooltip title="Toggle light/dark theme">
       <IconButton color="inherit" onClick={themeCtx.toggle}>
-        {themeCtx.useDark ? <BrightnessHighIcon /> : <Brightness4Icon />}
+        {themeCtx.useDark ? <BrightnessHigh /> : <Brightness4 />}
       </IconButton>
     </Tooltip>
   );
@@ -51,7 +45,7 @@ export default function NavBar({
                   onClick={navDrawerContext.toggle}
                   aria-label="Open Menu"
                 >
-                  <MenuIcon />
+                  <Menu />
                 </IconButton>
               )
             }
@@ -67,7 +61,7 @@ export default function NavBar({
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <GithubIcon />
+                <GitHub />
               </IconButton>
             </Tooltip>
           ) : null}

@@ -1,12 +1,14 @@
-import Divider from '@material-ui/core/Divider';
-import Link from '@material-ui/core/Link';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import {
+  Divider,
+  Link,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  SwipeableDrawer,
+  Typography,
+} from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { NavDrawerContext, NavDrawerContextConsumer } from './NavDrawerContext';
