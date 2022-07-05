@@ -11,8 +11,8 @@ import {
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 
-import { ContactItemMenuProps } from '@Components/ContactItem';
 import { info } from './Contact';
+import { ContactItemMenuProps } from './ContactItem';
 
 export default function PGPMenu({
   anchorEl,
