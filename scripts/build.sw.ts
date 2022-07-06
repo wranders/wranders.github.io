@@ -2,7 +2,7 @@ import { build } from 'esbuild';
 import { readdirSync, readFileSync, statSync } from 'fs';
 import { join, posix, relative, resolve, sep } from 'path';
 
-const swEntrypoint = resolve('serviceWorker/sw.ts');
+const swEntrypoint = resolve('src/sw/sw.ts');
 const swOut = resolve('dist/sw.js');
 
 function getAllFiles(dir: string, out?: string[]): string[] {
