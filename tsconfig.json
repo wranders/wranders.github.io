@@ -8,9 +8,9 @@
     "lib": ["ESNext", "DOM"],
     "baseUrl": ".",
     "paths": {
-      "@app": [ "src/App/index" ],
-      "@Components/*": [ "src/Components/*" ],
-      "@Screens/*": [ "src/Screens/*" ]
+      "@app": [ "src/app/index" ],
+      "@components/*": [ "src/components/*" ],
+      "@screens/*": [ "src/screens/*" ]
     },
   },
   "include": [

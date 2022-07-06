@@ -1,7 +1,7 @@
 import React from 'react';
 
-import TitleContext from './TitleContext';
-import { DefaultDelim } from './TitleProvider';
+import TitleContext from './titleContext';
+import { DefaultDelim } from './titleProvider';
 
 type TitleProps = {
   pageName: string;

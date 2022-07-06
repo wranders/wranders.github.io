@@ -10,8 +10,8 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { NewReleases } from '@material-ui/icons';
 import React from 'react';
 
-import Title from '@Components/Title';
-import TitleCard from './TitleCard';
+import Title from '@components/title';
+import TitleCard from './titleCard';
 
 export default function Home(): React.ReactElement {
   const classes = makeStyles((theme: Theme) =>

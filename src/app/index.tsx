@@ -3,12 +3,12 @@ import { ThemeOptions } from '@material-ui/core/styles';
 import React from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 
-import Theme from './Theme';
-import { TitleProvider } from '@Components/Title';
-import Contact from '@Screens/Contact/Contact';
-import E404 from '@Screens/Error/E404';
-import Home from '@Screens/Home/Home';
-import Navigation from './Navigation';
+import Theme from './theme';
+import { TitleProvider } from '@components/title';
+import Contact from '@screens/contact/contact';
+import E404 from '@screens/error/error404';
+import Home from '@screens/home/home';
+import Navigation from './navigation';
 
 export default function App(): React.ReactElement {
   const AppTheme: ThemeOptions = {

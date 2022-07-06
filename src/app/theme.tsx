@@ -8,7 +8,7 @@ import { PaletteOptions } from '@material-ui/core/styles/createPalette';
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import React from 'react';
 
-import ThemeContext from './ThemeContext';
+import ThemeContext from './themeContext';
 
 declare module '@material-ui/core/styles/createMixins' {
   interface Mixins {

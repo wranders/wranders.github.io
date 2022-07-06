@@ -11,12 +11,12 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Close, Email, VpnKey } from '@material-ui/icons';
 import React from 'react';
 
-import Title from '@Components/Title';
-import ContactItem from './ContactItem';
-import DiscordMenu from './DiscordMenu';
-import EmailMenu from './EmailMenu';
-import KeyBaseMenu from './KeyBaseMenu';
-import PGPMenu from './PGPMenu';
+import Title from '@components/title';
+import ContactItem from './contactItem';
+import DiscordMenu from './contactItemMenuDiscord';
+import EmailMenu from './contactItemMenuEmail';
+import KeyBaseMenu from './contactItemMenuKeybase';
+import PGPMenu from './contactItemMenuPGP';
 
 export const info = {
   discord: {
