@@ -8,7 +8,6 @@
     "lib": ["ESNext", "DOM"],
     "baseUrl": ".",
     "paths": {
-      "@app": [ "src/App/index" ],
       "@Components/*": [ "src/Components/*" ],
       "@Screens/*": [ "src/Screens/*" ]
     },
