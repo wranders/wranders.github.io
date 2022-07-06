@@ -48,6 +48,11 @@ sw.addEventListener('fetch', (event: FetchEvent) => {
           headers: { 'Content-Type': 'text/plain' },
         });
       }
+
+      return new Response('Request not found', {
+        status: 404,
+        headers: { 'Content-Type': 'text/plain' },
+      });
     })(),
   );
 });
