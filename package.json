@@ -17,11 +17,10 @@
   "private": true,
   "scripts": {
     "lint": "eslint scripts/*.ts src/**/*.{ts,tsx}",
-    "clean": "npm run clean:dist && npm run clean:scripts && npm run clean:sw",
+    "clean": "npm run clean:dist && npm run clean:scripts",
     "clean:dist": "node -e \"require('fs').rm('dist',{recursive:true,force:true},()=>{});\"",
     "clean:scripts": "node -e \"require('fs').rm('scripts/bin',{recursive:true,force:true},()=>{});\"",
-    "clean:sw": "node -e \"require('fs').rm('serviceWorker/generated',{recursive:true,force:true},()=>{});\"",
-    "precompilescripts": "npm run clean:scripts && npm run clean:sw",
+    "precompilescripts": "npm run clean:scripts",
     "compilescripts": "tsc --project scripts",
     "build:copy": "node scripts/bin/copy.js",
     "build:app": "node scripts/bin/build.js",
