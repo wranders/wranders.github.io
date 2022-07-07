@@ -1,4 +1,4 @@
-import { Avatar, Menu, MenuItem, MenuProps } from '@material-ui/core';
+import { Avatar, Menu, MenuProps } from '@material-ui/core';
 import React from 'react';
 
 import ContactItem from './contactItem';
