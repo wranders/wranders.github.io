@@ -1,51 +1,75 @@
+import { SnackbarContext } from '@components/snackbar';
 import {
+  Avatar,
   Button,
+  createStyles,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
+  makeStyles,
   Menu,
   MenuItem,
+  MenuProps,
 } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { VpnKey } from '@material-ui/icons';
 import React from 'react';
+import ContactItem from './contactItem';
+import MenuItemLink from './menuItemLink';
 
-import { info } from './contact';
-import { ContactItemMenuProps } from './contactItem';
+const keyfile = '/pgp_pubkey.asc';
+const keyFingerprint = 'BFD9 DFF2 3686 CB17 B2CF 7E1A 5F5D 48D0 D507 7519';
 
-export default function PGPMenu({
-  anchorEl,
-  open,
-  onClose,
-  snackbarFunc,
-}: ContactItemMenuProps): React.ReactElement {
+export interface ContactItemPGPProps {
+  className?: string;
+}
+
+export default function ContactItemPGP({
+  className,
+}: ContactItemPGPProps): React.ReactElement {
+  return (
+    <ContactItem
+      avatar={
+        <Avatar alt="PGP Icon" className={className}>
+          <VpnKey />
+        </Avatar>
+      }
+      menu={MenuPGP}
+      primaryText="PGP"
+      secondaryText={keyFingerprint}
+    />
+  );
+}
+
+function MenuPGP({ anchorEl, onClose, open }: MenuProps): React.ReactElement {
+  const snackbarCtx = React.useContext(SnackbarContext);
   const [dialogOpen, setDialogOpen] = React.useState<boolean>(false);
 
   function CopyFingerprint(): void {
-    navigator.clipboard.writeText(info.pgp.fingerprint);
-    if (snackbarFunc) snackbarFunc('PGP Fingerprint Copied to Clipboard');
+    navigator.clipboard.writeText(keyFingerprint);
+    if (snackbarCtx)
+      snackbarCtx.pushMessage('PGP Public Key Copied to Clipboard');
     if (onClose) onClose({}, 'backdropClick');
   }
 
   function CopyHexFingerprint(): void {
-    navigator.clipboard.writeText(
-      '0x' + info.pgp.fingerprint.replace(/\s/g, ''),
-    );
-    if (snackbarFunc) snackbarFunc('PGP Fingerprint (0x) Copied to Clipboard');
+    navigator.clipboard.writeText('0x' + keyFingerprint.replace(/\s/g, ''));
+    if (snackbarCtx)
+      snackbarCtx.pushMessage('PGP Public Key Copied to Clipboard');
     if (onClose) onClose({}, 'backdropClick');
   }
 
   function DownloadASC(): void {
-    if (snackbarFunc) snackbarFunc('PGP Public Key Download Started');
+    if (snackbarCtx)
+      snackbarCtx.pushMessage('PGP Public Key Copied to Clipboard');
     if (onClose) onClose({}, 'backdropClick');
   }
-
   return (
     <div>
       <Menu
-        anchorEl={anchorEl}
         keepMounted
+        anchorEl={anchorEl}
         open={open}
         onClose={() => {
           if (onClose) onClose({}, 'backdropClick');
@@ -55,9 +79,9 @@ export default function PGPMenu({
         <MenuItem onClick={CopyHexFingerprint}>
           Copy Fingerprint &#40;0x&#41;
         </MenuItem>
-        <MenuItem component="a" href={info.pgp.file} onClick={DownloadASC}>
+        <MenuItemLink href={keyfile} onClick={DownloadASC}>
           Download ASCII Armored Key
-        </MenuItem>
+        </MenuItemLink>
         <MenuItem
           onClick={() => {
             if (onClose) onClose({}, 'backdropClick');
@@ -67,28 +91,17 @@ export default function PGPMenu({
           View Key
         </MenuItem>
       </Menu>
-      <PGPDialog
-        open={dialogOpen}
-        setDialogOpen={setDialogOpen}
-        snackbarFunc={snackbarFunc}
-      />
+      <DialogPGP open={dialogOpen} setOpen={setDialogOpen} />
     </div>
   );
 }
 
-//##############################################################################
-
-type PGPDialogProps = {
+interface DialogPGPProps {
   open: boolean;
-  setDialogOpen(value: React.SetStateAction<boolean>): void;
-  snackbarFunc?(message: string): void;
-};
+  setOpen(value: React.SetStateAction<boolean>): void;
+}
 
-function PGPDialog({
-  open,
-  setDialogOpen,
-  snackbarFunc,
-}: PGPDialogProps): React.ReactElement {
+function DialogPGP({ open, setOpen }: DialogPGPProps): React.ReactElement {
   const classes = makeStyles(() =>
     createStyles({
       keyContent: {
@@ -97,41 +110,42 @@ function PGPDialog({
       },
     }),
   )();
-  const [dialogContent, setDialogContent] =
-    React.useState<string>('Loading...');
+  const snackbarCtx = React.useContext(SnackbarContext);
+  const [content, setContent] = React.useState<string>('Loading...');
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
 
   React.useEffect(() => {
     if (!isLoading) return;
-    fetch(info.pgp.file)
+    fetch(keyfile)
       .then((resp) => {
         if (!resp.ok) throw new Error(resp.statusText);
         return resp.text();
       })
       .then((text) => {
-        setDialogContent(text);
+        setContent(text);
         setIsLoading(false);
       })
       .catch((err) => {
         const errMsg = 'There was an error fetching the PGP key:\n' + err;
-        setDialogContent(errMsg);
+        setContent(errMsg);
         setIsLoading(false);
         console.error(err);
       });
-  }, [dialogContent]);
+  }, [content]);
 
   function CopyKeyContent(): void {
-    navigator.clipboard.writeText(dialogContent);
-    if (snackbarFunc) snackbarFunc('PGP Public Key Copied to Clipboard');
-    setDialogOpen(false);
+    navigator.clipboard.writeText(content);
+    if (snackbarCtx)
+      snackbarCtx.pushMessage('PGP Public Key Copied to Clipboard');
+    setOpen(false);
   }
 
   return (
-    <Dialog onClose={() => setDialogOpen(false)} open={open} maxWidth={false}>
+    <Dialog onClose={() => setOpen(false)} open={open} maxWidth={false}>
       <DialogTitle>PGP Key</DialogTitle>
       <DialogContent dividers>
         <DialogContentText className={classes.keyContent}>
-          {dialogContent}
+          {content}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
@@ -141,7 +155,7 @@ function PGPDialog({
         <Button
           variant="contained"
           color="secondary"
-          onClick={() => setDialogOpen(false)}
+          onClick={() => setOpen(false)}
         >
           Close
         </Button>

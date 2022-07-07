@@ -1,45 +1,12 @@
-import {
-  Avatar,
-  Container,
-  Divider,
-  IconButton,
-  List,
-  Snackbar,
-  Typography,
-} from '@material-ui/core';
+import { Container, Divider, List, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Close, Email, VpnKey } from '@material-ui/icons';
 import React from 'react';
 
 import Title from '@components/title';
-import ContactItem from './contactItem';
-import DiscordMenu from './contactItemMenuDiscord';
-import EmailMenu from './contactItemMenuEmail';
-import KeyBaseMenu from './contactItemMenuKeybase';
-import PGPMenu from './contactItemMenuPGP';
-
-export const info = {
-  discord: {
-    icon: '/static/icons/discord-icon-245x240.png',
-    handle: 'doUbleU#2047',
-  },
-  email: {
-    addr: 'w@doubleu.codes',
-  },
-  keybase: {
-    icon: '/static/icons/keybase-icon-256x256.png',
-    handle: 'keybase.io/wranders',
-  },
-  pgp: {
-    file: '/pgp_pubkey.asc',
-    fingerprint: 'BFD9 DFF2 3686 CB17 B2CF 7E1A 5F5D 48D0 D507 7519',
-  },
-};
-
-type SnackbarEntry = {
-  message: string;
-  key: number;
-};
+import ContactItemDiscord from './contactItemDiscord';
+import ContactItemKeybase from './contactItemKeybase';
+import ContactItemEmail from './contactItemEmail';
+import ContactItemPGP from './contactItemPGP';
 
 export default function Contact(): React.ReactElement {
   const classes = makeStyles((theme: Theme) =>
@@ -61,30 +28,6 @@ export default function Contact(): React.ReactElement {
       },
     }),
   )();
-  const snackbarRef = React.useState<Array<SnackbarEntry>>([])[0];
-  const [snackbarOpen, setSnackbarOpen] = React.useState<boolean>(false);
-  const [snackbarInfo, setSnackbarInfo] = React.useState<
-    SnackbarEntry | undefined
-  >(undefined);
-
-  function processSnackbarQueue(): void {
-    if (snackbarRef.length > 0) {
-      setSnackbarInfo(snackbarRef.shift());
-      setSnackbarOpen(true);
-    }
-  }
-
-  function handleSnackbarOpen(message: string): void {
-    snackbarRef.push({
-      message,
-      key: new Date().getTime(),
-    });
-    if (snackbarOpen) {
-      setSnackbarOpen(false);
-    } else {
-      processSnackbarQueue();
-    }
-  }
 
   return (
     <main>
@@ -95,71 +38,15 @@ export default function Contact(): React.ReactElement {
         </Typography>
         <Divider className={classes.spacedDivider} />
         <List className={classes.contactList}>
-          <ContactItem
-            avatar={
-              <Avatar alt="Email" className={classes.green}>
-                <Email />
-              </Avatar>
-            }
-            primaryText="Email"
-            secondaryText={info.email.addr}
-            menu={EmailMenu}
-            snackbarFunc={handleSnackbarOpen}
-          />
+          <ContactItemEmail className={classes.green} />
           <Divider />
-          <ContactItem
-            avatar={
-              <Avatar alt="PGP" className={classes.green}>
-                <VpnKey />
-              </Avatar>
-            }
-            primaryText="PGP"
-            secondaryText={info.pgp.fingerprint}
-            menu={PGPMenu}
-            snackbarFunc={handleSnackbarOpen}
-          />
+          <ContactItemPGP className={classes.green} />
           <Divider />
-          <ContactItem
-            avatar={<Avatar alt="Keybase" src={info.keybase.icon} />}
-            primaryText="Keybase"
-            secondaryText={info.keybase.handle}
-            menu={KeyBaseMenu}
-          />
+          <ContactItemKeybase />
           <Divider />
-          <ContactItem
-            avatar={<Avatar alt="Discord" src={info.discord.icon} />}
-            primaryText="Discord"
-            secondaryText={info.discord.handle}
-            menu={DiscordMenu}
-            snackbarFunc={handleSnackbarOpen}
-          />
+          <ContactItemDiscord />
         </List>
       </Container>
-      <Snackbar
-        key={snackbarInfo ? snackbarInfo.key : undefined}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        open={snackbarOpen}
-        autoHideDuration={5000}
-        onClose={(_, reason) => {
-          if (reason === 'clickaway') return;
-          setSnackbarOpen(false);
-        }}
-        onExited={() => processSnackbarQueue()}
-        message={snackbarInfo ? snackbarInfo.message : undefined}
-        action={
-          <IconButton
-            aria-label="close"
-            color="inherit"
-            className={classes.snackbarClose}
-            onClick={() => setSnackbarOpen(false)}
-          >
-            <Close />
-          </IconButton>
-        }
-      />
     </main>
   );
 }
