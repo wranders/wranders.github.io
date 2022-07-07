@@ -4,7 +4,7 @@ import React from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 
 import Contact from '@screens/contact/contact';
-import E404 from '@screens/error/error404';
+import Error404 from '@screens/error/error404';
 import Home from '@screens/home/home';
 import Navigation from './navigation';
 import AppContext from './appContext';
@@ -30,7 +30,7 @@ export default function App(): React.ReactElement {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<E404 />} />
+          <Route path="*" element={<Error404 />} />
         </Routes>
       </HashRouter>
     </AppContext>

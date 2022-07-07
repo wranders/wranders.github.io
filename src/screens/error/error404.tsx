@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 import Title from '@components/title';
 
-export default function E404(): React.ReactElement {
+export default function Error404(): React.ReactElement {
   const location = useLocation();
   return (
     <main>
