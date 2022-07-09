@@ -3,5 +3,5 @@
   "semi": true,
   "trailingComma": "all",
   "singleQuote": true,
-  "tadWidth": 2
+  "tabWidth": 2
 }
