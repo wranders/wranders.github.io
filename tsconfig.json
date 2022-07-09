@@ -8,15 +8,18 @@
     "lib": ["ESNext", "DOM"],
     "baseUrl": ".",
     "paths": {
-      "@app": [ "src/app/index" ],
-      "@components/*": [ "src/components/*" ],
-      "@screens/*": [ "src/screens/*" ]
+      "$app": [ "src/app/index" ],
+      "$app/*": [ "src/app/*" ],
+      "$components/*": [ "src/components/*" ],
+      "$screens/*": [ "src/screens/*" ]
     },
   },
   "include": [
     "src/**/*"
   ],
   "exclude": [
+    "src/sw",
+    "scripts",
     "node_modules",
     "dist"
   ]
