@@ -90,11 +90,13 @@ function isExe(path: string, pathExt: string | null): boolean {
     g = parseInt('010', 8),
     o = parseInt('001', 8);
   const ug = u | g;
+  const pgid = typeof process.getgid === 'undefined' ? -1 : process.getgid();
+  const puid = typeof process.getuid === 'undefined' ? -1 : process.getuid();
   const ret =
     mod & o ||
-    (mod & g && gid === process.getgid()) ||
-    (mod & u && uid === process.getuid()) ||
-    (mod & ug && process.getuid() === 0);
+    (mod & g && gid === pgid) ||
+    (mod & u && uid === puid) ||
+    (mod & ug && puid === 0);
   return !!ret;
 }
 
