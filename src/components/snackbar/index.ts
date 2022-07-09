@@ -1,5 +1,5 @@
-import Snackbar from './snackbar';
 import SnackbarContext from './snackbarContext';
+import SnackbarProvider from './snackbarProvider';
 
-export default Snackbar;
+export default SnackbarProvider;
 export { SnackbarContext };

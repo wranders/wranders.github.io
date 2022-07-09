@@ -1,43 +1,47 @@
-import { SnackbarContext } from '@components/snackbar';
+import { SnackbarContext } from '$components/snackbar';
+import { VpnKey } from '@mui/icons-material';
 import {
   Avatar,
   Button,
-  createStyles,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
-  makeStyles,
   Menu,
   MenuItem,
   MenuProps,
-} from '@material-ui/core';
-import { VpnKey } from '@material-ui/icons';
+  styled,
+} from '@mui/material';
 import React from 'react';
 import ContactItem from './contactItem';
 import MenuItemLink from './menuItemLink';
 
-const keyfile = '/pgp_pubkey.asc';
-const keyFingerprint = 'BFD9 DFF2 3686 CB17 B2CF 7E1A 5F5D 48D0 D507 7519';
+const PGPKeyFile = '/pgp_pubkey.asc';
+const PGPKeyFingerprint = 'BFD9DFF23686CB17B2CF7E1A5F5D48D0D5077519';
 
-export interface ContactItemPGPProps {
-  className?: string;
-}
+export default function ContactItemPGP(): React.ReactElement {
+  const PGPAvatar = styled(Avatar)(({ theme }) => ({
+    color: theme.palette.getContrastText(theme.palette.primary.main),
+    backgroundColor: theme.palette.primary.main,
+  }));
 
-export default function ContactItemPGP({
-  className,
-}: ContactItemPGPProps): React.ReactElement {
+  function renderReadableFingerprint(): string {
+    const readable = PGPKeyFingerprint.match(/.{1,4}/g);
+    if (readable === null) return PGPKeyFingerprint;
+    return readable.join(' ');
+  }
+
   return (
     <ContactItem
       avatar={
-        <Avatar alt="PGP Icon" className={className}>
+        <PGPAvatar alt="PGP Icon">
           <VpnKey />
-        </Avatar>
+        </PGPAvatar>
       }
       menu={MenuPGP}
       primaryText="PGP"
-      secondaryText={keyFingerprint}
+      secondaryText={renderReadableFingerprint()}
     />
   );
 }
@@ -46,53 +50,53 @@ function MenuPGP({ anchorEl, onClose, open }: MenuProps): React.ReactElement {
   const snackbarCtx = React.useContext(SnackbarContext);
   const [dialogOpen, setDialogOpen] = React.useState<boolean>(false);
 
-  function CopyFingerprint(): void {
-    navigator.clipboard.writeText(keyFingerprint);
+  function handleCopyFingerprint(): void {
+    navigator.clipboard.writeText(PGPKeyFingerprint);
     if (snackbarCtx)
-      snackbarCtx.pushMessage('PGP Public Key Copied to Clipboard');
+      snackbarCtx.pushMessage('PGP public key fingerprint copied to clipboard');
     if (onClose) onClose({}, 'backdropClick');
   }
 
-  function CopyHexFingerprint(): void {
-    navigator.clipboard.writeText('0x' + keyFingerprint.replace(/\s/g, ''));
+  function handleCopyHexFingerprint(): void {
+    navigator.clipboard.writeText('0x' + PGPKeyFingerprint);
     if (snackbarCtx)
-      snackbarCtx.pushMessage('PGP Public Key Copied to Clipboard');
+      snackbarCtx.pushMessage(
+        'PGP public key fingerprint (0x) copied to clipboard',
+      );
     if (onClose) onClose({}, 'backdropClick');
   }
 
-  function DownloadASC(): void {
-    if (snackbarCtx)
-      snackbarCtx.pushMessage('PGP Public Key Copied to Clipboard');
+  function handleDownloadASC(): void {
+    if (snackbarCtx) snackbarCtx.pushMessage('PGP public key download started');
     if (onClose) onClose({}, 'backdropClick');
   }
+
   return (
-    <div>
-      <Menu
-        keepMounted
-        anchorEl={anchorEl}
-        open={open}
-        onClose={() => {
+    <Menu
+      keepMounted
+      anchorEl={anchorEl}
+      open={open}
+      onClose={() => {
+        if (onClose) onClose({}, 'backdropClick');
+      }}
+    >
+      <MenuItem onClick={handleCopyFingerprint}>Copy Fingerprint</MenuItem>
+      <MenuItem onClick={handleCopyHexFingerprint}>
+        Copy Fingerprint &#40;0x&#41;
+      </MenuItem>
+      <MenuItemLink href={PGPKeyFile} onClick={handleDownloadASC}>
+        Download ASCII armored key
+      </MenuItemLink>
+      <MenuItem
+        onClick={() => {
           if (onClose) onClose({}, 'backdropClick');
+          setDialogOpen(true);
         }}
       >
-        <MenuItem onClick={CopyFingerprint}>Copy Fingerprint</MenuItem>
-        <MenuItem onClick={CopyHexFingerprint}>
-          Copy Fingerprint &#40;0x&#41;
-        </MenuItem>
-        <MenuItemLink href={keyfile} onClick={DownloadASC}>
-          Download ASCII Armored Key
-        </MenuItemLink>
-        <MenuItem
-          onClick={() => {
-            if (onClose) onClose({}, 'backdropClick');
-            setDialogOpen(true);
-          }}
-        >
-          View Key
-        </MenuItem>
-      </Menu>
+        View Key
+      </MenuItem>
       <DialogPGP open={dialogOpen} setOpen={setDialogOpen} />
-    </div>
+    </Menu>
   );
 }
 
@@ -102,21 +106,13 @@ interface DialogPGPProps {
 }
 
 function DialogPGP({ open, setOpen }: DialogPGPProps): React.ReactElement {
-  const classes = makeStyles(() =>
-    createStyles({
-      keyContent: {
-        fontFamily: 'monospace',
-        whiteSpace: 'pre',
-      },
-    }),
-  )();
   const snackbarCtx = React.useContext(SnackbarContext);
   const [content, setContent] = React.useState<string>('Loading...');
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
 
   React.useEffect(() => {
     if (!isLoading) return;
-    fetch(keyfile)
+    fetch(PGPKeyFile)
       .then((resp) => {
         if (!resp.ok) throw new Error(resp.statusText);
         return resp.text();
@@ -126,30 +122,34 @@ function DialogPGP({ open, setOpen }: DialogPGPProps): React.ReactElement {
         setIsLoading(false);
       })
       .catch((err) => {
-        const errMsg = 'There was an error fetching the PGP key:\n' + err;
-        setContent(errMsg);
+        const errorMessage = 'There was an error fetching the PGP key:\n' + err;
+        setContent(errorMessage);
         setIsLoading(false);
         console.error(err);
       });
   }, [content]);
 
-  function CopyKeyContent(): void {
+  function handleCopyKeyContent(): void {
     navigator.clipboard.writeText(content);
     if (snackbarCtx)
-      snackbarCtx.pushMessage('PGP Public Key Copied to Clipboard');
+      snackbarCtx.pushMessage('PGP public key copied to clipboard');
     setOpen(false);
   }
 
   return (
     <Dialog onClose={() => setOpen(false)} open={open} maxWidth={false}>
-      <DialogTitle>PGP Key</DialogTitle>
+      <DialogTitle>PGP Public Key</DialogTitle>
       <DialogContent dividers>
-        <DialogContentText className={classes.keyContent}>
+        <DialogContentText sx={{ fontFamily: 'monospace', whiteSpace: 'pre' }}>
           {content}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button variant="contained" color="primary" onClick={CopyKeyContent}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleCopyKeyContent}
+        >
           Copy
         </Button>
         <Button

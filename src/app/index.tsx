@@ -1,28 +1,27 @@
-import { green, red } from '@material-ui/core/colors';
-import { ThemeOptions } from '@material-ui/core/styles';
 import React from 'react';
-import { HashRouter, Route, Routes } from 'react-router-dom';
-
-import Contact from '@screens/contact/contact';
-import Error404 from '@screens/error/error404';
-import Home from '@screens/home/home';
-import Navigation from './navigation';
+import { ThemeOptions } from '@mui/material';
+import { green, red } from '@mui/material/colors';
 import AppContext from './appContext';
+import { HashRouter, Route, Routes } from 'react-router-dom';
+import Navigation from '$app/navigation';
+import Home from '$screens/home';
+import { Error404 } from '$screens/error';
+import Contact from '$screens/contact';
+
+const appTheme: ThemeOptions = {
+  mixins: {
+    denseToolbar: {
+      minHeight: 48,
+    },
+  },
+  palette: {
+    primary: green,
+    secondary: red,
+    mode: 'light',
+  },
+};
 
 export default function App(): React.ReactElement {
-  const appTheme: ThemeOptions = {
-    mixins: {
-      denseToolbar: {
-        minHeight: 48,
-      },
-    },
-    palette: {
-      primary: green,
-      secondary: red,
-      type: 'light',
-    },
-  };
-
   return (
     <AppContext appTheme={appTheme} siteName="DoUbleU">
       <HashRouter>

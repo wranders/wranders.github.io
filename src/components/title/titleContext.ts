@@ -1,9 +1,9 @@
 import React from 'react';
 
-export type TitleContextType = {
-  siteName: string;
-  delim: string;
-};
+export interface TitleContextType {
+  title?: string;
+  delimeter?: string;
+}
 
 const TitleContext = React.createContext<TitleContextType | null>(null);
 

@@ -1,24 +1,26 @@
 import React from 'react';
+import TitleContext, { TitleContextType } from './titleContext';
 
-import TitleContext from './titleContext';
-import { DefaultDelim } from './titleProvider';
+export const DefaultDelimeter = '|';
 
-type TitleProps = {
+interface TitleProps {
   pageName: string;
-};
+}
 
 export default function Title({ pageName }: TitleProps): null {
-  const ctx = React.useContext(TitleContext);
-  const { delim, siteName } =
-    ctx !== null ? ctx : { delim: DefaultDelim, siteName: undefined };
+  const titleCtx = React.useContext(TitleContext);
+  const { delimeter, title }: TitleContextType =
+    titleCtx !== null
+      ? titleCtx
+      : { delimeter: DefaultDelimeter, title: undefined };
 
-  function GetTitle(): string {
-    if (siteName === 'undefined') return pageName;
-    return [pageName, delim, siteName].join(' ');
+  function getTitle(): string {
+    if (typeof title === 'undefined') return pageName;
+    return [pageName, delimeter, title].join(' ');
   }
 
   React.useEffect(() => {
-    document.title = GetTitle();
+    document.title = getTitle();
   });
 
   return null;

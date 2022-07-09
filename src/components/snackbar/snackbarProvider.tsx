@@ -1,34 +1,28 @@
 import {
-  createStyles,
   IconButton,
-  makeStyles,
-  Snackbar as MuiSnackbar,
-  Theme,
-} from '@material-ui/core';
-import { Close } from '@material-ui/icons';
+  IconButtonProps,
+  Snackbar,
+  SnackbarOrigin,
+  styled,
+} from '@mui/material';
+import { Close } from '@mui/icons-material';
 import React from 'react';
 import SnackbarContext from './snackbarContext';
 
-export type SnackbarEntry = {
+interface SnackbarEntry {
   key: number;
   message: string;
-};
+}
 
-export interface SnackbarProps {
+interface SnackbarProviderProps {
+  anchorOrgin?: SnackbarOrigin;
   children?: React.ReactNode | Array<React.ReactNode>;
 }
 
-export default function Snackbar({
+export default function SnackbarProvider({
+  anchorOrgin,
   children,
-}: SnackbarProps): React.ReactElement {
-  const classes = makeStyles((theme: Theme) =>
-    createStyles({
-      close: {
-        padding: theme.spacing(0.5),
-      },
-    }),
-  )();
-
+}: SnackbarProviderProps): React.ReactElement {
   const messages = React.useState<Array<SnackbarEntry>>([])[0];
   const [open, setOpen] = React.useState<boolean>(false);
   const [message, setMessage] = React.useState<SnackbarEntry | undefined>(
@@ -47,40 +41,33 @@ export default function Snackbar({
       message: msg,
       key: new Date().getTime(),
     });
-    if (open) {
-      setOpen(false);
-    } else {
-      processQueue();
-    }
+    open ? setOpen(false) : processQueue();
   }
 
   return (
     <SnackbarContext.Provider value={{ pushMessage: pushMessage }}>
       {children}
-      <MuiSnackbar
+      <Snackbar
         key={message ? message.key : undefined}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
+        message={message ? message.message : undefined}
         open={open}
         autoHideDuration={5000}
-        onClose={() => {
-          setOpen(false);
-        }}
-        onExited={() => processQueue()}
-        message={message ? message.message : undefined}
+        onClose={() => setOpen(false)}
         action={
-          <IconButton
+          <SnackbarClose
             aria-label="close"
             color="inherit"
-            className={classes.close}
             onClick={() => setOpen(false)}
           >
             <Close />
-          </IconButton>
+          </SnackbarClose>
         }
-      ></MuiSnackbar>
+        anchorOrigin={anchorOrgin}
+      />
     </SnackbarContext.Provider>
   );
 }
+
+const SnackbarClose = styled(IconButton)<IconButtonProps>(({ theme }) => ({
+  padding: theme.spacing(0.5),
+}));

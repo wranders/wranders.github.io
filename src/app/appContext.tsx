@@ -1,13 +1,12 @@
-import { TitleProvider } from '@components/title';
-import { ThemeOptions } from '@material-ui/core';
+import { ThemeOptions } from '@mui/material';
 import React from 'react';
-
-import Snackbar from '@components/snackbar';
-import Theme from './theme';
+import Theme from '$app/theme';
+import { TitleProvider } from '$components/title';
+import SnackbarProvider from '$components/snackbar';
 
 interface AppContextProps {
   appTheme: ThemeOptions;
-  children: React.ReactNode | Array<React.ReactNode>;
+  children?: React.ReactNode | Array<React.ReactNode>;
   siteName: string;
 }
 
@@ -18,8 +17,12 @@ export default function AppContext({
 }: AppContextProps): React.ReactElement {
   return (
     <Theme appTheme={appTheme} darkModeKey="themeDarkMode">
-      <TitleProvider siteName={siteName}>
-        <Snackbar>{children}</Snackbar>
+      <TitleProvider title={siteName}>
+        <SnackbarProvider
+          anchorOrgin={{ vertical: 'bottom', horizontal: 'center' }}
+        >
+          {children}
+        </SnackbarProvider>
       </TitleProvider>
     </Theme>
   );

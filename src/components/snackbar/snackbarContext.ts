@@ -1,9 +1,9 @@
 import React from 'react';
 
-export type SnackBarContextType = {
+interface SnackbarContextType {
   pushMessage(message: string): void;
-};
+}
 
-const SnackbarContext = React.createContext<SnackBarContextType | null>(null);
+const SnackbarContext = React.createContext<SnackbarContextType | null>(null);
 
 export default SnackbarContext;

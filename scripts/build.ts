@@ -9,7 +9,7 @@ const WebRoot = resolve('dist');
 
 const PugEntrypoint = resolve('src/index.pug');
 
-const AppEntrypoint = resolve('src/index.ts');
+const AppEntrypoint = resolve('src/index.tsx');
 
 //==============================================================================
 

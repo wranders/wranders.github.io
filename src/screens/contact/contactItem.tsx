@@ -1,3 +1,4 @@
+import { MoreVert } from '@mui/icons-material';
 import {
   IconButton,
   ListItem,
@@ -5,19 +6,14 @@ import {
   ListItemSecondaryAction,
   ListItemText,
   MenuProps,
-} from '@material-ui/core';
-import { MoreVert } from '@material-ui/icons';
+} from '@mui/material';
 import React from 'react';
 
-export interface ContactItemMenuProps extends MenuProps {
-  snackbarFunc?(message: string): void;
-}
-
-export interface ContactItemProps extends ContactItemMenuProps {
+interface ContactItemProps extends MenuProps {
   avatar: React.ReactElement;
   primaryText: string;
   secondaryText: string;
-  menu: React.ElementType<ContactItemMenuProps>;
+  menu: React.ElementType<MenuProps>;
 }
 
 export default function ContactItem({
@@ -25,7 +21,6 @@ export default function ContactItem({
   primaryText,
   secondaryText,
   menu,
-  snackbarFunc,
 }: Omit<ContactItemProps, 'open'>): React.ReactElement {
   const [anchorElement, setAnchorElement] = React.useState<Element | null>(
     null,
@@ -57,7 +52,6 @@ export default function ContactItem({
           anchorEl={anchorElement}
           open={open}
           onClose={handleMenuClose}
-          snackbarFunc={snackbarFunc}
         />
       </ListItemSecondaryAction>
     </ListItem>

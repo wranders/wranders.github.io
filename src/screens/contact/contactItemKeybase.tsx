@@ -1,19 +1,18 @@
-import { Avatar, Menu, MenuProps } from '@material-ui/core';
+import { Avatar, Menu, MenuProps } from '@mui/material';
 import React from 'react';
-
 import ContactItem from './contactItem';
 import MenuItemLink from './menuItemLink';
 
-const iconSource = '/static/icons/keybase-icon-256x256.png';
-const handle = 'keybase.io/wranders';
+const KeybaseIconSource = '/static/icons/keybase-icon-256x256.png';
+const KeybaseHandle = 'keybase.io/wranders';
 
 export default function ContactItemKeybase(): React.ReactElement {
   return (
     <ContactItem
-      avatar={<Avatar alt="Keybase Icon" src={iconSource} />}
+      avatar={<Avatar alt="Keybase Icon" src={KeybaseIconSource} />}
       menu={MenuKeybase}
       primaryText="Keybase"
-      secondaryText={handle}
+      secondaryText={KeybaseHandle}
     />
   );
 }
@@ -26,7 +25,8 @@ function MenuKeybase({
   return (
     <Menu keepMounted anchorEl={anchorEl} open={open} onClose={onClose}>
       <MenuItemLink
-        href={'https://' + handle}
+        newTab
+        href={'https://' + KeybaseHandle}
         onClick={() => {
           if (onClose) onClose({}, 'backdropClick');
         }}
@@ -34,12 +34,13 @@ function MenuKeybase({
         View on Keybase
       </MenuItemLink>
       <MenuItemLink
-        href={'https://' + handle + '/chat'}
+        newTab
+        href={'https://' + KeybaseHandle + '/chat'}
         onClick={() => {
           if (onClose) onClose({}, 'backdropClick');
         }}
       >
-        Open Chat
+        Open chat
       </MenuItemLink>
     </Menu>
   );

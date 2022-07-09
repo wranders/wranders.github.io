@@ -1,30 +1,28 @@
+import { SnackbarContext } from '$components/snackbar';
+import { Email } from '@mui/icons-material';
+import { Avatar, Menu, MenuItem, MenuProps, styled } from '@mui/material';
 import React from 'react';
-import { Avatar, Menu, MenuItem, MenuProps } from '@material-ui/core';
-
 import ContactItem from './contactItem';
-import { Email } from '@material-ui/icons';
-import { SnackbarContext } from '@components/snackbar';
 import MenuItemLink from './menuItemLink';
 
-const emailAddress = 'w@doubleu.codes';
+const ContactItemEmailAddress = 'w@doubleu.codes';
 
-export interface ContactItemEmailProps {
-  className?: string;
-}
+export default function ContactItemEmail(): React.ReactElement {
+  const EmailAvatar = styled(Avatar)(({ theme }) => ({
+    color: theme.palette.getContrastText(theme.palette.primary.main),
+    backgroundColor: theme.palette.primary.main,
+  }));
 
-export default function ContactItemEmail({
-  className,
-}: ContactItemEmailProps): React.ReactElement {
   return (
     <ContactItem
       avatar={
-        <Avatar alt="Email Icon" className={className}>
+        <EmailAvatar alt="Email Icon">
           <Email />
-        </Avatar>
+        </EmailAvatar>
       }
       menu={MenuEmail}
       primaryText="Email"
-      secondaryText={emailAddress}
+      secondaryText={ContactItemEmailAddress}
     />
   );
 }
@@ -32,18 +30,18 @@ export default function ContactItemEmail({
 function MenuEmail({ anchorEl, onClose, open }: MenuProps): React.ReactElement {
   const snackbarCtx = React.useContext(SnackbarContext);
 
-  function copyAddress(): void {
-    navigator.clipboard.writeText(emailAddress);
-    if (snackbarCtx)
-      snackbarCtx.pushMessage('Email Address Copied to Clipboard');
+  function handleCopyAddress(): void {
+    navigator.clipboard.writeText(ContactItemEmailAddress);
+    if (snackbarCtx !== null)
+      snackbarCtx.pushMessage('Email address copied to clipboard');
     if (onClose) onClose({}, 'backdropClick');
   }
 
   return (
-    <Menu anchorEl={anchorEl} keepMounted open={open} onClose={onClose}>
-      <MenuItem onClick={copyAddress}>Copy Address</MenuItem>
+    <Menu keepMounted anchorEl={anchorEl} open={open} onClose={onClose}>
+      <MenuItem onClick={handleCopyAddress}>Copy Address</MenuItem>
       <MenuItemLink
-        href={'mailto:' + emailAddress}
+        href={'mailto:' + ContactItemEmailAddress}
         onClick={() => {
           if (onClose) onClose({}, 'backdropClick');
         }}

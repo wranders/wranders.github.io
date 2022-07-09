@@ -1,23 +1,20 @@
 import React from 'react';
+import { DefaultDelimeter } from './title';
+import TitleContext, { TitleContextType } from './titleContext';
 
-import TitleContext from './titleContext';
-
-export const DefaultDelim = '|';
-
-type TitleProviderProps = {
+interface TitleProviderProps extends TitleContextType {
   children?: React.ReactNode | Array<React.ReactNode>;
-  delim?: string;
-  siteName: string;
-};
+}
 
 export default function TitleProvider({
   children,
-  delim,
-  siteName,
+  delimeter,
+  title,
 }: TitleProviderProps): React.ReactElement {
-  if (typeof delim === 'undefined') delim = DefaultDelim;
+  if (typeof delimeter === 'undefined') delimeter = DefaultDelimeter;
+
   return (
-    <TitleContext.Provider value={{ delim: delim, siteName: siteName }}>
+    <TitleContext.Provider value={{ delimeter: delimeter, title: title }}>
       {children}
     </TitleContext.Provider>
   );

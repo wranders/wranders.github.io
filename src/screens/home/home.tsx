@@ -1,46 +1,41 @@
-import {
-  Container,
-  Divider,
-  Grid,
-  Icon,
-  Paper,
-  Typography,
-} from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { NewReleases } from '@material-ui/icons';
+import Title from '$components/title';
+import { NewReleases } from '@mui/icons-material';
+import { Divider, Grid, Icon, Paper, styled, Typography } from '@mui/material';
+import { Container } from '@mui/system';
 import React from 'react';
-
-import Title from '@components/title';
 import TitleCard from './titleCard';
 
 export default function Home(): React.ReactElement {
-  const classes = makeStyles((theme: Theme) =>
-    createStyles({
-      content: {
-        display: 'flex',
-        overflow: 'hidden',
-      },
-      contentContainer: {
-        marginTop: theme.spacing(15),
-        marginBottom: theme.spacing(30),
-        display: 'flex',
-        position: 'relative',
-      },
-      paper: {
-        maxWidth: 400,
-        margin: `${theme.spacing(1)}px auto`,
-        padding: theme.spacing(2),
-      },
-    }),
-  )();
+  const HomeSection = styled('section')(({ theme }) => ({
+    display: 'flex',
+    overflow: 'hidden',
+    minHeight: `calc(100vh - ${theme.mixins.denseToolbar.minHeight}px)`,
+  }));
+
+  const HomeSectionContainer = styled(Container)(({ theme }) => ({
+    marginTop: theme.spacing(15),
+    marginBottom: theme.spacing(30),
+    display: 'flex',
+    position: 'relative',
+  }));
+
+  const HomeSectionPaper = styled(Paper)(({ theme }) => ({
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    padding: theme.spacing(2),
+    maxWidth: 400,
+    height: 'fit-content',
+  }));
 
   return (
     <main>
       <Title pageName="Welcome" />
       <TitleCard />
-      <section className={classes.content}>
-        <Container className={classes.contentContainer}>
-          <Paper className={classes.paper}>
+      <HomeSection id="content">
+        <HomeSectionContainer>
+          <HomeSectionPaper>
             <Grid container wrap="nowrap" spacing={2}>
               <Grid item>
                 <Icon>
@@ -57,9 +52,9 @@ export default function Home(): React.ReactElement {
                 </Typography>
               </Grid>
             </Grid>
-          </Paper>
-        </Container>
-      </section>
+          </HomeSectionPaper>
+        </HomeSectionContainer>
+      </HomeSection>
     </main>
   );
 }
