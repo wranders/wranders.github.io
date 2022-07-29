@@ -14,6 +14,7 @@ interface ContactItemProps extends MenuProps {
   primaryText: string;
   secondaryText: string;
   menu: React.ElementType<MenuProps>;
+  style?: React.CSSProperties;
 }
 
 export default function ContactItem({
@@ -21,6 +22,7 @@ export default function ContactItem({
   primaryText,
   secondaryText,
   menu,
+  style,
 }: Omit<ContactItemProps, 'open'>): React.ReactElement {
   const [anchorElement, setAnchorElement] = React.useState<Element | null>(
     null,
@@ -43,7 +45,11 @@ export default function ContactItem({
   return (
     <ListItem>
       <ListItemAvatar>{avatar}</ListItemAvatar>
-      <ListItemText primary={primaryText} secondary={secondaryText} />
+      <ListItemText
+        primary={primaryText}
+        secondary={secondaryText}
+        style={style}
+      />
       <ListItemSecondaryAction>
         <IconButton edge="end" onClick={handleMenuOpen}>
           <MoreVert />
