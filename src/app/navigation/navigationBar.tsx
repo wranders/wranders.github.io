@@ -13,13 +13,11 @@ interface NavigationBarProps {
 export default function NavigationBar({
   siteSource,
 }: NavigationBarProps): React.ReactElement {
+  const themeCtx = React.useContext(ThemeContext);
   const AppBarOffset = styled('div')(({ theme }) => theme.mixins.denseToolbar);
 
   function renderThemeToggle(): React.ReactElement | null {
-    const themeCtx = React.useContext(ThemeContext);
-
     if (!themeCtx) return null;
-
     return (
       <Tooltip title="Toggle light/dark theme">
         <IconButton color="inherit" onClick={themeCtx.toggle}>
