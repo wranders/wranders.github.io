@@ -5,6 +5,7 @@ import ContactItemDiscord from './contactItemDiscord';
 import ContactItemEmail from './contactItemEmail';
 import ContactItemKeybase from './contactItemKeybase';
 import ContactItemPGP from './contactItemPGP';
+import ContactItemSession from './contactItemSession';
 
 export default function Contact(): React.ReactElement {
   const ContactList = styled(List)(({ theme }) => ({
@@ -26,6 +27,8 @@ export default function Contact(): React.ReactElement {
           <ContactItemPGP />
           <Divider />
           <ContactItemKeybase />
+          <Divider />
+          <ContactItemSession />
           <Divider />
           <ContactItemDiscord />
           <Divider />
