@@ -6,20 +6,22 @@ const sw = self as ServiceWorkerGlobalScope & typeof globalThis;
 const CACHEKEY = 'www.doubleu.codes-v1';
 
 sw.addEventListener('activate', (event: ExtendableEvent) => {
-  event.waitUntil(async () => {
-    if (sw.registration.navigationPreload) {
-      await sw.registration.navigationPreload.enable();
-    }
-    caches.keys().then((keys) => {
-      return Promise.all(
-        keys.map((key) => {
-          if (key !== CACHEKEY) {
-            return caches.delete(key);
-          }
-        }),
-      );
-    });
-  });
+  event.waitUntil(
+    (async () => {
+      if (sw.registration.navigationPreload) {
+        await sw.registration.navigationPreload.enable();
+      }
+      caches.keys().then((keys) => {
+        return Promise.all(
+          keys.map((key) => {
+            if (key !== CACHEKEY) {
+              return caches.delete(key);
+            }
+          }),
+        );
+      });
+    })(),
+  );
 });
 
 sw.addEventListener('fetch', (event: FetchEvent) => {
