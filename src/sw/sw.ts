@@ -23,15 +23,17 @@ sw.addEventListener('activate', (event: ExtendableEvent) => {
 });
 
 sw.addEventListener('fetch', (event: FetchEvent) => {
-  event.respondWith(caches.open(CACHEKEY).then((cache) => {
-    return cache.match(event.request.url).then((cachedResponse) => {
-      if (cachedResponse) return cachedResponse;
-      return fetch(event.request).then((fetchedResponse) => {
-        cache.put(event.request, fetchedResponse.clone());
-        return fetchedResponse;
-      })
-    })
-  }))
+  event.respondWith(
+    caches.open(CACHEKEY).then((cache) => {
+      return cache.match(event.request.url).then((cachedResponse) => {
+        if (cachedResponse) return cachedResponse;
+        return fetch(event.request).then((fetchedResponse) => {
+          cache.put(event.request, fetchedResponse.clone());
+          return fetchedResponse;
+        });
+      });
+    }),
+  );
 });
 
 sw.addEventListener('install', () => {
