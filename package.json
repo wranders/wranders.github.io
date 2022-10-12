@@ -26,9 +26,7 @@
     "build:app": "node scripts/bin/build.js",
     "build:sw": "node scripts/bin/build.sw.js",
     "prebuild": "npm run clean:dist && npm run compilescripts",
-    "build": "npm run build:copy && npm run build:app && npm run build:sw",
-    "predeploy": "npm run build",
-    "deploy": "node scripts/bin/publish.js"
+    "build": "npm run build:copy && npm run build:app && npm run build:sw"
   },
   "devDependencies": {
     "@emotion/react": "^11.9.3",
