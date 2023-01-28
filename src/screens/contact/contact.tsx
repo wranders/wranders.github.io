@@ -3,7 +3,6 @@ import { Container, Divider, List, styled, Typography } from '@mui/material';
 import React from 'react';
 import ContactItemDiscord from './contactItemDiscord';
 import ContactItemEmail from './contactItemEmail';
-import ContactItemKeybase from './contactItemKeybase';
 import ContactItemPGP from './contactItemPGP';
 import ContactItemSession from './contactItemSession';
 
@@ -25,8 +24,6 @@ export default function Contact(): React.ReactElement {
           <ContactItemEmail />
           <Divider />
           <ContactItemPGP />
-          <Divider />
-          <ContactItemKeybase />
           <Divider />
           <ContactItemSession />
           <Divider />
