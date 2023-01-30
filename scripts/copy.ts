@@ -25,7 +25,6 @@ const copyFiles: Copy = [
       '.nojekyll',
       'browserconfig.xml',
       'CNAME',
-      'keybase.txt',
       'pgp_pubkey.asc',
       'site.webmanifest',
     ],
