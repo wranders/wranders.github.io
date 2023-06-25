@@ -1,9 +1,11 @@
 {
   "liveServer.settings.root": "/dist",
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+  "[typescript]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true,
+    },
   },
   "eslint.validate": [
     "javascript"
-  ]
+  ],
 }
