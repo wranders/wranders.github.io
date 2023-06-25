@@ -4,7 +4,7 @@ import React from 'react';
 import ContactItem from './contactItem';
 
 const DiscordIconSource = '/static/icons/discord-icon-245x240.png';
-const DiscordHandle = 'doUbleU#2047';
+const DiscordHandle = 'doubleu';
 
 export default function ContactItemDiscord(): React.ReactElement {
   return (
