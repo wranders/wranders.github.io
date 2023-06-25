@@ -9,13 +9,12 @@ import ContactItemSession from './contactItemSession';
 export default function Contact(): React.ReactElement {
   const ContactList = styled(List)(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
-    width: '100%',
   }));
 
   return (
     <main>
       <Title pageName="Contact" />
-      <Container disableGutters fixed maxWidth="sm">
+      <Container disableGutters fixed maxWidth="md">
         <Typography component="h1" variant="h2">
           Contact
         </Typography>
