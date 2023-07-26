@@ -1,8 +1,9 @@
 {
   "files": [
     "build.ts",
-    "build.sw.ts",
     "copy.ts",
+    "watch.ts",
+    "run.ts",
   ],
   "compilerOptions": {
     "target": "ESNext",

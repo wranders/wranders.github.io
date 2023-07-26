@@ -33,3 +33,4 @@ html(lang='en')
     script(src='./index.js' type='module')
     script.
       if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js').then(()=>{console.log('ServiceWorker registered');})})}
+    //- :esbuildListener
