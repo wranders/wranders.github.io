@@ -17,14 +17,12 @@
   "private": true,
   "scripts": {
     "lint": "eslint scripts/*.ts src/**/*.{ts,tsx}",
-    "clean": "npm run clean:dist && npm run clean:scripts",
-    "clean:dist": "node -e \"require('fs').rm('dist',{recursive:true,force:true},()=>{});\"",
-    "clean:scripts": "node -e \"require('fs').rm('scripts/bin',{recursive:true,force:true},()=>{});\"",
-    "precompilescripts": "npm run clean:scripts",
+    "clean": "node -e \"const fs = require('fs');for(const dir of process.argv.slice(1)) {fs.rm(dir,{recursive:true,force:true},()=>{});}\"",
+    "precompilescripts": "npm run clean scripts/bin",
     "compilescripts": "tsc --project scripts",
     "build:copy": "node scripts/bin/copy.js",
     "build:sw": "node scripts/bin/build.sw.js",
-    "prebuild": "npm run clean:dist && npm run compilescripts",
+    "prebuild": "npm run clean dist && npm run compilescripts",
     "build": "node scripts/bin/build.js app html",
     "postbuild": "npm run build:copy"
   },
