@@ -18,7 +18,7 @@ import ContactItem from './contactItem';
 import MenuItemLink from './menuItemLink';
 
 const PGPKeyFile = '/pgp_pubkey.asc';
-const PGPKeyFingerprint = 'BFD9DFF23686CB17B2CF7E1A5F5D48D0D5077519';
+const PGPKeyFingerprint = '2AAC7A39280B83CF344ADAAE62C1D6CADBB373CD';
 
 export default function ContactItemPGP(): React.ReactElement {
   const PGPAvatar = styled(Avatar)(({ theme }) => ({
